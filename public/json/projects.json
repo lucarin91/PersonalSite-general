@@ -1,0 +1,44 @@
+[
+  {
+    "name":"School Projects",
+    "items":
+      [
+        {
+          "name":"Funw@p",
+          "info":"",
+          "link":"https://github.com/MCSN-project2014/APproject"
+        },
+        {
+          "name":"Party Manager",
+          "info":"",
+          "link":"https://github.com/sfcoding-school/party-manager"
+        },
+        {
+          "name":"CassaforteOnline",
+          "info":"",
+          "link":"https://github.com/sfcoding-school/CassaforteOnline"
+        },
+        {
+          "name":"TardisRV",
+          "info":"",
+          "link":"https://github.com/sfcoding-school/TardisRV"
+        }
+      ]
+  },
+  {
+    "name":"Personal Projects",
+    "items":
+      [
+        {
+          "name":"webService-deployer",
+          "info":"",
+          "link":"https://github.com/sfcoding/webService-deployer"
+        },
+        {
+          "name":"mp3Player",
+          "info":"",
+          "link":"https://github.com/lucarin91/mp3Player"
+        }
+      ]
+  }
+]

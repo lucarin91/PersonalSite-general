@@ -1,0 +1,16 @@
+extends layout
+
+block body
+  .container.main
+    .main-menu
+      ul.nav.nav-tabs
+        li(role='presentation', ng-class="{ active: isActive('/') }")
+          a(href='.') Home
+        li(role='presentation', ng-class="{ active: isActive('/curriculum') }")
+          a(href='curriculum') Curriculum
+        li(role='presentation', ng-class="{ active: isActive('/project') }")
+          a(href='project') Progetti
+        li(role='presentation', ng-class="{ active: isActive('/contact') }")
+          a(href='contact') Contatti
+    .main-content
+      div(ng-view)
