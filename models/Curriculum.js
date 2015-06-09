@@ -2,8 +2,15 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var TodoSchema = new Schema({
-    user: {type: Schema.Types.ObjectId, ref: 'Users'},
-    items: [{type:String, required:true}]
+    date: {type: Date, required:true},
+    name: {
+      eng: {type:String},
+      ita: {type:String}
+    },
+    info: {
+      eng: {type:String},
+      ita: {type:String}
+    }
 });
 
 module.exports = mongoose.model('Curriculum', TodoSchema);

@@ -2,12 +2,21 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var TodoSchema = new Schema({
-    name: {type:String, required:true, unique:true},
+    name: {
+      eng: {type:String},
+      ita: {type:String}
+    },
     items:
       [{
-          name: {type:String, unique:true, required:true},
-          info: {type:String, required:true},
-          link: {type:String, required:true}
+          name: {
+            eng: {type:String},
+            ita: {type:String}
+          },
+          info: {
+            eng: {type:String},
+            ita: {type:String}
+          },
+          link: {type:String}
       }]
   });
 

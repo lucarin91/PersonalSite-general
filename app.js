@@ -46,10 +46,19 @@ mongoose.connect('mongodb://'+app.get('mongodb_uri')+'/personal', function(err) 
 
     } else {
         console.log('connection successful');
-        /*var Users = require('./models/Users.js');
-        Users.create({username:'luca',password:'dio'}, function(err,data){
+        var Me = require('./models/Me.js');
+        Me.remove({},function(err){
+            if(!err) console.log('ok!');
+        });
+        Me.create({
+          bio:  {
+            eng: "i'm Luca",
+            ita: "sono Luca"
+          },
+          img:  "/img/luca.jpg"
+        }, function(err,data){
           if(!err) console.log(data._id);
-        });*/
+        });
     }
 });
 
@@ -58,13 +67,22 @@ mongoose.connect('mongodb://'+app.get('mongodb_uri')+'/personal', function(err) 
  */
  var index = require('./routes/index');
  var partials = require('./routes/partials');
- //api = require('./routes/api'),
+ var api = {};
+ api.me = require('./routes/api/me');
 
 // serve index and view partials
 app.use('/', index);
 app.use('/html', partials);
 // JSON API
-//app.use('/api/me', api.me);
+app.use('/api/:lang',function(req,res,next){
+  if (req.params.lang =='ita' || req.params.lang =='eng'){
+    req.lang = req.params.lang;
+    next();
+  }else {
+    next(new Error('Lingua non riconosciuta!'));
+  }
+});
+app.use('/api/*/me', api.me);
 
 // redirect all others to the index (HTML5 history)
 app.use('*', index);

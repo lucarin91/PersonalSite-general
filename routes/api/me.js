@@ -2,13 +2,18 @@ var express = require('express');
 var router = express.Router();
 //var authController = require('../controllers/auth');
 //var mongoose = require('mongoose');
-var Me = require('../models/Me.js');
+var Me = require('../../models/Me.js');
 
 /* GET /me listing. */
 router.get('/', function(req, res, next) {
-  Me.findOne({}, function (err, todos) {
+  Me.aggregate({
+   $project : {
+       bio : "$bio."+req.lang,
+       img: 1
+   }},// );
+  /*Me.findOne({}, { "bio.ita": 0 },*/ function (err, todos) {
     if (err) return next(err);
-    res.json(todos);
+    res.json(todos[0]);
   });
 });
 
