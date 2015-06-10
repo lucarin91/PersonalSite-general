@@ -1,49 +1,60 @@
 var express = require('express');
 var router = express.Router();
-var authController = require('../controllers/auth');
-var mongoose = require('mongoose');
-var Curriculum = require('../models/Curriculum.js');
+//var authController = require('../controllers/auth');
+//var mongoose = require('mongoose');
+var Curriculum = require('../../models/Curriculum.js');
 
 /* GET /curriculum */
 router.get('/', function(req, res, next) {
-  Curriculum.find({user:req.userId}, function (err, todos) {
+  Curriculum.aggregate({
+   $project : {
+       name : "$name."+req.lang,
+       info : "$info."+req.lang,
+       date: 1
+   }}, function (err, todos) {
     if (err) return next(err);
     res.json(todos);
   });
+  /*Curriculum.find({}, function (err, todos) {
+    if (err) return next(err);
+    res.json(todos);
+  });*/
 });
 
 /* POST /curriculum */
-router.post('/', authController.isAuthenticated, function(req, res, next) {
-  req.body.user = req.user._id;
-  Curriculum.update({user: req.user._id}, req.body, {upsert:true}, function (err, post) {
+router.post('/', /*authController.isAuthenticated,*/ function(req, res, next) {
+  var query = {name:{},info:{},date:req.body.date};
+  query.name[req.lang] = req.body.name;
+  query.info[req.lang] = req.body.info;
+  console.log(req.body);
+  Curriculum.create(query, function (err, post) {
     if (err) return next(err);
-    res.json(post);
+    res.json(post._id);
   });
 });
 
 /* DELETE /curriculum */
-router.delete('/', authController.isAuthenticated, function(req, res, next) {
-  Curriculum.remove({user:req.user._id}, function (err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
-});
-/*
-PUT /users/:id
-router.put('/:id', function(req, res, next) {
-  Curriculum.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+router.delete('/:id', /*authController.isAuthenticated,*/ function(req, res, next) {
+  Curriculum.remove({_id:req.params.id}, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-/* DELETE /users/:id
-router.delete('/:id', function(req, res, next) {
-  Curriculum.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+/* PUT /curriculum/:id */
+router.put('/:id', function(req, res, next) {
+  var query = {$set:{}};
+  if (req.body.info)
+    query.$set["info."+req.lang] = req.body.info;
+  if (req.body.name)
+    query.$set["name."+req.lang] = req.body.name;
+  if (req.body.date)
+    query.$set.date = req.body.date;
+  console.log(query);
+  Curriculum.update({_id:req.params.id}, query, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
-*/
 
 module.exports = router;

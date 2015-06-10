@@ -46,19 +46,10 @@ mongoose.connect('mongodb://'+app.get('mongodb_uri')+'/personal', function(err) 
 
     } else {
         console.log('connection successful');
-        var Me = require('./models/Me.js');
-        Me.remove({},function(err){
-            if(!err) console.log('ok!');
-        });
-        Me.create({
-          bio:  {
-            eng: "i'm Luca",
-            ita: "sono Luca"
-          },
-          img:  "/img/luca.jpg"
-        }, function(err,data){
-          if(!err) console.log(data._id);
-        });
+        var test = require('./test/testdata.js');
+        test.me();
+        test.curriculum();
+        test.projects();
     }
 });
 
@@ -67,8 +58,9 @@ mongoose.connect('mongodb://'+app.get('mongodb_uri')+'/personal', function(err) 
  */
  var index = require('./routes/index');
  var partials = require('./routes/partials');
- var api = {};
- api.me = require('./routes/api/me');
+ var api = {me: require('./routes/api/me'),
+            curriculum: require('./routes/api/curriculum'),
+            projects: require('./routes/api/projects')};
 
 // serve index and view partials
 app.use('/', index);
@@ -83,6 +75,8 @@ app.use('/api/:lang',function(req,res,next){
   }
 });
 app.use('/api/*/me', api.me);
+app.use('/api/*/curriculum', api.curriculum);
+app.use('/api/*/projects', api.projects);
 
 // redirect all others to the index (HTML5 history)
 app.use('*', index);
