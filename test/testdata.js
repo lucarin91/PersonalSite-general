@@ -35,30 +35,31 @@ var test={
   },
   projects: function(){
     var Projects = require('../models/Projects');
-    Projects.remove({},function(err){
+    Projects.all.remove({},function(err){
         if(!err) console.log('ok!');
     });
-    Projects.create({
-      name: {
-        eng: "projects1",
-        ita: "progetti1"
-      },
-      items:
-        [{
-            name: {
-              eng: "first project",
-              ita: "primo progetto"
-            },
-            info: {
-              eng: "info of first project",
-              ita: "informazioni primo progetto"
-            },
-            link: "link"
-        }]
-    }, function(err,data){
-      if(!err) console.log(data._id);
-    });
-  }
+
+    Projects.item.create({
+          name: {
+            eng: "first project",
+            ita: "primo progetto"
+          },
+          info: {
+            eng: "info of first project",
+            ita: "informazioni primo progetto"
+          },
+          link: "link"
+      },function(err,data){
+          Projects.all.create({name: {
+            eng: "projects1",
+            ita: "progetti1"
+          },
+          items:
+            [data._id]
+          }, function(err,data){
+          if(!err) console.log(data._id);
+      });});
+    }
 };
 
 

@@ -23,11 +23,11 @@ router.get('/', function(req, res, next) {
 
 /* POST /curriculum */
 router.post('/', /*authController.isAuthenticated,*/ function(req, res, next) {
-  var query = {name:{},info:{},date:req.body.date};
-  query.name[req.lang] = req.body.name;
-  query.info[req.lang] = req.body.info;
+  var data = {name:{},info:{},date:req.body.date};
+  data.name[req.lang] = req.body.name;
+  data.info[req.lang] = req.body.info;
   console.log(req.body);
-  Curriculum.create(query, function (err, post) {
+  Curriculum.create(data, function (err, post) {
     if (err) return next(err);
     res.json(post._id);
   });
