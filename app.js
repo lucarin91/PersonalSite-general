@@ -120,6 +120,8 @@ if (env === 'production') {
   });
 }
 
+var server = app.listen();
+
 /**
  * Start Server
  */
