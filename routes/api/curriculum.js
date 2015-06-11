@@ -33,7 +33,7 @@ router.post('/', /*authController.isAuthenticated,*/ function(req, res, next) {
   });
 });
 
-/* DELETE /curriculum */
+/* DELETE /curriculum/:id */
 router.delete('/:id', /*authController.isAuthenticated,*/ function(req, res, next) {
   Curriculum.remove({_id:req.params.id}, function (err, post) {
     if (err) return next(err);
