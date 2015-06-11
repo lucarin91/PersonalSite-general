@@ -50,6 +50,7 @@ mongoose.connect('mongodb://'+app.get('mongodb_uri')+'/personal', function(err) 
         test.me();
         test.curriculum();
         test.projects();
+        test.skills();
     }
 });
 
@@ -60,7 +61,8 @@ mongoose.connect('mongodb://'+app.get('mongodb_uri')+'/personal', function(err) 
  var partials = require('./routes/partials');
  var api = {me: require('./routes/api/me'),
             curriculum: require('./routes/api/curriculum'),
-            projects: require('./routes/api/projects')};
+            projects: require('./routes/api/projects'),
+            skills: require('./routes/api/skills')};
 
 // serve index and view partials
 app.use('/', index);
@@ -77,6 +79,7 @@ app.use('/api/:lang',function(req,res,next){
 app.use('/api/*/me', api.me);
 app.use('/api/*/curriculum', api.curriculum);
 app.use('/api/*/projects', api.projects);
+app.use('/api/*/skills', api.skills);
 
 // redirect all others to the index (HTML5 history)
 app.use('*', index);

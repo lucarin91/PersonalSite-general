@@ -3,11 +3,12 @@ var Schema = mongoose.Schema;
 
 var TodoSchema = new Schema({
   name: {type:String, required:true},
-  items:
-    [{
-        name: {type:String, required:true},
-        point: {type:Number, required:true}
-    }]
+  items: [{ type: Schema.Types.ObjectId, ref: 'SItems' }]
 });
 
-module.exports = mongoose.model('Skills', TodoSchema);
+var item = new Schema({
+    name: {type:String, required:true},
+    point: {type:Number, required:true}
+});
+
+module.exports = {all: mongoose.model('Skills', TodoSchema), item: mongoose.model('SItems',item)};

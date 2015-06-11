@@ -59,7 +59,24 @@ var test={
           }, function(err,data){
           if(!err) console.log(data._id);
       });});
-    }
+    },
+    skills: function(){
+      var Skills = require('../models/Skills');
+      Skills.all.remove({},function(err){
+          if(!err) console.log('ok!');
+      });
+
+      Skills.item.create({
+            name: "prima skill",
+            point: 2
+        },function(err,data){
+            Skills.all.create({
+              name: "primo skill gruppo",
+              items: [data._id]
+            }, function(err,data){
+            if(!err) console.log(data._id);
+        });});
+      }
 };
 
 

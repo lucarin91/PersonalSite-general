@@ -76,11 +76,49 @@ router.post('/:id',/* authController.isAuthenticated,*/ function(req, res, next)
   });*/
 });
 
-/* DELETE /projects */
-router.delete('/',/* authController.isAuthenticated, */ function(req, res, next) {
-  Projects.remove({user:req.user._id}, function (err, post) {
+/* PUT /projects/:id */
+router.put('/:id', function(req,res,next){
+  var query = {$set:{}};
+  if (req.body.name)
+    query.$set["name."+req.lang] = req.body.name;
+  Projects.all.update({_id: req.params.id},query,function(err,post){
     if (err) return next(err);
     res.json(post);
+  });
+});
+
+/* DELETE /projects/:id */
+router.delete('/:id',/* authController.isAuthenticated, */ function(req, res, next) {
+  Projects.all.remove({_id:req.params.id}, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+/* PUT /projects/:id_projects/:id_items */
+router.put('/item/:idi', function(req,res,next){
+  var query = {$set:{}};
+  if (req.body.info)
+    query.$set["info."+req.lang] = req.body.info;
+  if (req.body.name)
+    query.$set["name."+req.lang] = req.body.name;
+  if (req.body.link)
+    query.$set.link = req.body.link;
+  Projects.item.update({_id: req.params.idi},query,function(err,post){
+    if (err) return next(err);
+    res.json(post);
+  });
+});
+
+
+
+/* DELETE /projects/:id_projects/:id_item */
+router.delete('/item/:idi',/* authController.isAuthenticated, */ function(req, res, next) {
+  Projects.item.remove({_id:req.params.idi}, function (err, post) {
+    if (err) return next(err);
+    Projects.all.update({items: req.params.idi},{$pull: {items: req.params.idi}}, function(err,post){
+      res.json(post);
+    });
   });
 });
 
