@@ -1,4 +1,4 @@
-div
+div(ng-controller='CurriculumCtrl')
   ul.row
     li(ng-repeat='entry in curriculum', ng-bind='entry')
 
@@ -7,6 +7,6 @@ div
 
       .col-sm-3(ng-repeat='skill in cat.items')
         span(ng-bind='skill.name')
-        
+
         .progress.curriculum-points
           .progress-bar.progress-bar-success(role='progressbar', aria-valuenow='{{ skill.point }}', aria-valuemin='0', aria-valuemax='3', ng-style='{width : percentia(skill.point) }')

@@ -1,5 +1,34 @@
 'use strict';
 
+var mysiteApp = angular.module('mysiteApp',[
+  'ngRoute',
+  'mysiteControllers',
+  'mysiteServices'
+]);
+
+mysiteApp.config (['$routeProvider','$locationProvider',
+  function($routeProvider,$locationProvider){
+    $routeProvider.
+      when('/:lang/me', {
+        templateUrl: 'html/me',
+        controller: 'HomeCtrl',
+        resolve: {
+          me:function(MeService, $route){
+            return MeService.getMe({language:$route.current.params.lang})
+          }
+        }
+      }).
+      when('/:lang/curriculum',{
+        templateUrl: 'html/curriculum',
+        controller: 'CurriculumCtrl'
+      })
+      .otherwise({
+        redirectTo: '/ita/me'
+      });
+      // configure html5 to get links working on jsfiddle
+      $locationProvider.html5Mode(true);
+  }]);
+/*
 angular.module('PersonalSite',[
   'ngRoute',
   'Controllers',
@@ -52,3 +81,4 @@ function($routeProvider, $locationProvider) {
   // configure html5 to get links working on jsfiddle
   $locationProvider.html5Mode(true);
 }]);
+*/
