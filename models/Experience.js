@@ -19,4 +19,4 @@ var TodoSchema = new Schema({
     link: {type:String}
 });
 
-module.exports = mongoose.model('Curriculum', TodoSchema);
+module.exports = mongoose.model('Experience', TodoSchema);

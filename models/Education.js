@@ -21,4 +21,4 @@ var TodoSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Curriculum', TodoSchema);
+module.exports = mongoose.model('Education', TodoSchema);
