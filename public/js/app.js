@@ -32,7 +32,8 @@ mysiteApp.config (['$routeProvider','$locationProvider',
 angular.module('PersonalSite',[
   'ngRoute',
   'Controllers',
-  'Services'
+  'Services',
+  'Directives'
   ])
 .config(['$routeProvider', '$locationProvider',
 function($routeProvider, $locationProvider) {

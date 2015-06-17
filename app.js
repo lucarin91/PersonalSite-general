@@ -48,7 +48,8 @@ mongoose.connect('mongodb://'+app.get('mongodb_uri')+'/personal', function(err) 
         console.log('connection successful');
         var test = require('./test/testdata.js');
         test.me();
-        test.curriculum();
+        test.education();
+        test.experience();
         test.projects();
         test.skills();
     }
@@ -60,9 +61,12 @@ mongoose.connect('mongodb://'+app.get('mongodb_uri')+'/personal', function(err) 
  var index = require('./routes/index');
  var partials = require('./routes/partials');
  var api = {me: require('./routes/api/me'),
-            curriculum: require('./routes/api/curriculum'),
+            //curriculum: require('./routes/api/curriculum'),
+            experience: require('./routes/api/experience'),
+            education: require('./routes/api/education'),
             projects: require('./routes/api/projects'),
-            skills: require('./routes/api/skills')};
+            skills: require('./routes/api/skills'),
+            latex: require('./routes/api/latex')};
 
 // serve index and view partials
 app.use('/', index);
@@ -77,13 +81,14 @@ app.use('/api/:lang',function(req,res,next){
   }
 });
 app.use('/api/*/me', api.me);
-app.use('/api/*/curriculum', api.curriculum);
+app.use('/api/*/experience', api.experience);
+app.use('/api/*/education', api.education);
 app.use('/api/*/projects', api.projects);
 app.use('/api/*/skills', api.skills);
+app.use('/api/*/latex', api.latex);
 
 // redirect all others to the index (HTML5 history)
 app.use('*', index);
-
 
 /**
  * ERROR

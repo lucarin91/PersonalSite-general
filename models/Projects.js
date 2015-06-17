@@ -11,7 +11,11 @@ var item = new Schema({
     eng: {type:String},
     ita: {type:String}
   },
-  link: {type:String}
+  link: {type:String},
+  date: {
+    begin: {type: Date},
+    end: {type: Date}
+  }
 
 });
 
