@@ -3,7 +3,8 @@
 angular.module('PersonalSite',[
   'ngRoute',
   'Controllers',
-  'Services'
+  'Services',
+  'Directives'
   ])
 .config(['$routeProvider', '$locationProvider',
 function($routeProvider, $locationProvider) {

@@ -62,7 +62,8 @@ mongoose.connect('mongodb://'+app.get('mongodb_uri')+'/personal', function(err) 
  var api = {me: require('./routes/api/me'),
             curriculum: require('./routes/api/curriculum'),
             projects: require('./routes/api/projects'),
-            skills: require('./routes/api/skills')};
+            skills: require('./routes/api/skills'),
+            latex: require('./routes/api/latex')};
 
 // serve index and view partials
 app.use('/', index);
@@ -80,10 +81,10 @@ app.use('/api/*/me', api.me);
 app.use('/api/*/curriculum', api.curriculum);
 app.use('/api/*/projects', api.projects);
 app.use('/api/*/skills', api.skills);
+app.use('/api/*/latex', api.latex);
 
 // redirect all others to the index (HTML5 history)
 app.use('*', index);
-
 
 /**
  * ERROR

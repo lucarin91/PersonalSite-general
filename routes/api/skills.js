@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Skills = require('../../models/Skills.js');
+var Skills = require('../../models/Skills');
 
 /* GET /skills listing. */
 router.get('/', function(req, res, next) {
