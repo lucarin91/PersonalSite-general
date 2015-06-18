@@ -6,6 +6,14 @@ var mysiteApp = angular.module('mysiteApp',[
   'mysiteServices'
 ]);
 
+mysiteApp.run( function($rootScope, $location,language) {
+    // register listener to watch route changes
+    $rootScope.$on( "$routeChangeStart", function(event, next, current) {
+        language = next.params.lang;
+        //console.log();
+      })
+    });
+
 mysiteApp.config (['$routeProvider','$locationProvider',
   function($routeProvider,$locationProvider){
     $routeProvider.
@@ -20,8 +28,37 @@ mysiteApp.config (['$routeProvider','$locationProvider',
       }).
       when('/:lang/curriculum',{
         templateUrl: 'html/curriculum',
-        controller: 'CurriculumCtrl'
-      })
+        controller: 'CurriculumCtrl',
+        resolve: {
+          education:function(EducationService, $route){
+            return EducationService.getCurriculum({language:$route.current.params.lang})
+          },
+          experience:function(ExperienceService, $route){
+            return CurriculumService.getCurriculum({language:$route.current.params.lang})
+          },
+          skills : function(SkillsService, $route){
+              return SkillsService.getSkills({language:$route.current.params.lang})
+          }
+        }
+      }).
+      when('/:lang/projects',{
+        templateUrl: 'html/projects',
+        controller: 'ProjectCtrl',
+        resolve: {
+          projects:function(ProjectsService, $route){
+            return ProjectsService.getProjects({language:$route.current.params.lang})
+          }
+        }
+      })/*.
+      when('/:lang/contacts',{
+        templateUrl: 'html/projects',
+        controller: 'ProjectCtrl',
+        resolve: {
+          projects:function(ProjectsService, $route){
+            return ProjectsService.getProjects({language:$route.current.params.lang})
+          }
+        }
+      })*/
       .otherwise({
         redirectTo: '/ita/me'
       });

@@ -2,20 +2,25 @@
 
 var mysiteControllers = angular.module('mysiteControllers',[])
 
-mysiteControllers.controller('HomeCtrl', ['$scope','me',
-  function($scope,me){
-    $scope.me = me
-    /*
-    $scope.me = MeService.getMe({language:'ita'});
-    $scope.me.bio= "sonoa molto arrabst";
-    MeService.postMe({language:'ita'},$scope.me)
-    */
+mysiteControllers.controller('HomeCtrl', ['$scope','me','language',
+  function($scope,me,language){
+    $scope.me = me;
+
+    console.log(language)
  }]);
 
- mysiteControllers.controller('CurriculumCtrl',['$scope','CurriculumService',
-  function ($scope,CurriculumService){
-    $scope.curriculum = CurriculumService.getCurriculum({language:'ita'});
+ mysiteControllers.controller('CurriculumCtrl',['$scope','education','experience','skills','language',
+  function ($scope,education,experience,skills,language){
+    $scope.experience = experience;
+    $scope.education = education;
+    $scope.skills = skills;
+    $scope.experience = language=='ita'?'Esperienze':'Experience';
   }]);
+
+  mysiteControllers.controller('ProjectsCtrl',['$scope','projects',
+   function ($scope,projects){
+     $scope.projects = projects;
+   }]);
 
 /*
 angular.module('Controllers',[])
