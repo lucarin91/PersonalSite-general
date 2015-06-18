@@ -6,7 +6,7 @@ var mysiteApp = angular.module('mysiteApp',[
   'mysiteServices'
 ]);
 
-mysiteApp.run( function($rootScope, $location,language) {
+mysiteApp.run( function($rootScope, $location, language) {
     // register listener to watch route changes
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
         language = next.params.lang;
@@ -31,19 +31,19 @@ mysiteApp.config (['$routeProvider','$locationProvider',
         controller: 'CurriculumCtrl',
         resolve: {
           education:function(EducationService, $route){
-            return EducationService.getCurriculum({language:$route.current.params.lang})
+            return EducationService.getEducation({language: $route.current.params.lang});
           },
           experience:function(ExperienceService, $route){
-            return CurriculumService.getCurriculum({language:$route.current.params.lang})
+            return ExperienceService.getExperience({language: $route.current.params.lang});
           },
           skills : function(SkillsService, $route){
-              return SkillsService.getSkills({language:$route.current.params.lang})
+            return SkillsService.getSkills({language :$route.current.params.lang});
           }
         }
       }).
       when('/:lang/projects',{
         templateUrl: 'html/projects',
-        controller: 'ProjectCtrl',
+        controller: 'ProjectsCtrl',
         resolve: {
           projects:function(ProjectsService, $route){
             return ProjectsService.getProjects({language:$route.current.params.lang})

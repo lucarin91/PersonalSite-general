@@ -5,8 +5,7 @@ var mysiteControllers = angular.module('mysiteControllers',[])
 mysiteControllers.controller('HomeCtrl', ['$scope','me','language',
   function($scope,me,language){
     $scope.me = me;
-
-    console.log(language)
+    //console.log(language);
  }]);
 
  mysiteControllers.controller('CurriculumCtrl',['$scope','education','experience','skills','language',
@@ -14,7 +13,8 @@ mysiteControllers.controller('HomeCtrl', ['$scope','me','language',
     $scope.experience = experience;
     $scope.education = education;
     $scope.skills = skills;
-    $scope.experience = language=='ita'?'Esperienze':'Experience';
+  //  console.log(language);
+    $scope.strExperience = language=='ita'?'Esperienze':'Experience';
   }]);
 
   mysiteControllers.controller('ProjectsCtrl',['$scope','projects',

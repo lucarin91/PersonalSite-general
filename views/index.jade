@@ -6,14 +6,12 @@ block body
       ul.nav.nav-tabs
         li(role='presentation', ng-class="{ active: isActive('/') }")
           a(href='.') Home
-        li(role='presentation', ng-class="{ active: isActive('/:lang/curriculum') }")
-          a(href='curriculum') Curriculum
+        li(role='presentation', ng-class="{ active: isActive('/curriculum') }")
+          a(href='/ita/curriculum') Curriculum
         li(role='presentation', ng-class="{ active: isActive('/project') }")
-          a(href='project') Progetti
+          a(href='/ita/projects') Progetti
         li(role='presentation', ng-class="{ active: isActive('/contact') }")
           a(href='contact') Contatti
-    button.btn.btn-default(type='button', aria-label='Left Align')
-      span.glyphicon.glyphicon-align-left(aria-hidden='true')
     .main-content
 
       div(ng-view)

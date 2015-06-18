@@ -6,6 +6,7 @@
 
 var mysiteServices = angular.module('mysiteServices', ['ngResource']);
 
+//for the language of the site
 mysiteServices.value('language','ita')
 
 mysiteServices.factory('MeService',['$resource',
@@ -21,30 +22,32 @@ mysiteServices.factory('MeService',['$resource',
 mysiteServices.factory('ExperienceService',['$resource',
   function($resource){
     return $resource('/api/:language/experience',{language:'@lang'}, {
-      getExperience: {method:'GET', isArray:false}
+      getExperience: {method:'GET', isArray:true}
     });
 }]);
 
 mysiteServices.factory('EducationService',['$resource',
       function($resource){
         return $resource('/api/:language/education',{language:'@lang'}, {
-          getEducation: {method:'GET', isArray:false}
+          getEducation: {method:'GET', isArray:true}
         });
-}]);
-
-mysiteServices.factory('ProjectsService',['$resource',
-  function($resource){
-    return $resource('/api/:language/projects',{language:'@lang'}, {
-      getProjects: {method:'GET', isArray:false}
-    });
 }]);
 
 mysiteServices.factory('SkillsService',['$resource',
   function($resource){
     return $resource('/api/:language/skills',{language:'@lang'}, {
-      getSkills: {method:'GET', isArray:false}
+      getSkills: {method:'GET', isArray:true}
     });
 }]);
+
+mysiteServices.factory('ProjectsService',['$resource',
+  function($resource){
+    return $resource('/api/:language/projects',{language:'@lang'}, {
+      getProjects: {method:'GET', isArray:true}
+    });
+}]);
+
+
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
