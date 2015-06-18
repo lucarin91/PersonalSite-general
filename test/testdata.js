@@ -1,108 +1,126 @@
+var loremIpsum = require('lorem-ipsum');
+var loremPar = ['words','sentences','paragraphs'];
+var randomInt = function(min,max){
+  return Math.floor((Math.random() * (max-min+1)) + min);
+};
+
+function randomDate(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
+}
+
+var randomDateObj = function(){
+  var begin = randomDate(new Date('1/1/2010'),new Date());
+  return {
+    begin: begin,
+    end: randomDate(begin,new Date())
+  }
+};
+
 var test={
   me: function(){
     var Me = require('../models/Me.js');
-    Me.remove({},function(err){
-        if(!err) console.log('ok!');
-    });
+    Me.remove({}).exec();
     Me.create({
       bio:  {
-        eng: "I'm Luca",
-        ita: "Sono Luca"
+        eng: loremIpsum({count: 2, units: 'paragraphs'/*words,sentences,paragraphs*/ }),
+        ita: loremIpsum({count: 2, units: 'paragraphs'})
       },
       img:  "/img/luca.jpg"
-    }, function(err,data){
-      if(!err) console.log(data._id);
     });
   },
   experience: function(){
     var Experience = require('../models/Experience');
-    Experience.remove({},function(err){
-        if(!err) console.log('ok!');
-    });
-    Experience.create({
-        date: {begin:new Date('07/12/2014'),end:new Date('13/12/2015')},
-        company: "DOJO",
-        role: {
-          eng: 'master',
-          ita: 'mastro'
-        },
-        location:"filadelfia",
-        info: {
-          eng: 'thinks of thinks',
-          ita: 'info di roba'
-        },
-        link:"www.mipiacitu"
-    }, function(err,data){
-      if(!err) console.log(data._id);
-    });
+    Experience.remove({}).exec();
+    for (var i=0; i<5; i++){
+      Experience.create({
+          date: randomDateObj(),
+          company: loremIpsum({count: 2, units: loremPar[0] }),
+          role: {
+            eng: loremIpsum({count: 1, units: loremPar[0]}),
+            ita: loremIpsum({count: 1, units: loremPar[0]})
+          },
+          location: loremIpsum({count: 1, units: loremPar[0]}),
+          info: {
+            eng: loremIpsum({count: 3, units: loremPar[1]}),
+            ita: loremIpsum({count: 3, units: loremPar[1]})
+          },
+          link:loremIpsum({count: 1, units: loremPar[0]})
+      });
+    }
   },
   education: function(){
     var Education = require('../models/Education.js');
     Education.remove({},function(err){
         if(!err) console.log('ok!');
     });
-    Education.create({
-        date: {begin:new Date('07/12/2014'), end:new Date('13/12/2015')},
-        shool: {
-          eng: 'university',
-          ita: 'università'
-        },
-        degree: {
-          eng: 'computer science',
-          ita: 'informatica'
-        },
-        location:"milano",
-        score:{
-          eng: "3.5",
-          ita: "100"
-        }
-    }, function(err,data){
-      if(!err) console.log(data._id);
-    });
+    for(var i=0;i<3;i++){
+      Education.create({
+          date: randomDateObj(),
+          shool: {
+            eng: loremIpsum({count: 2, units: loremPar[0]}),
+            ita: loremIpsum({count: 2, units: loremPar[0]})
+          },
+          degree: {
+            eng: loremIpsum({count: 3, units: loremPar[0]}),
+            ita: loremIpsum({count: 3, units: loremPar[0]})
+          },
+          location: loremIpsum({count: 1, units: loremPar[0]}),
+          score:{
+            eng: ""+randomInt(1,4),
+            ita: ""+randomInt(80,110)
+          }
+      });
+    }
   },
   projects: function(){
     var Projects = require('../models/Projects');
-    Projects.all.remove({},function(err){
-        if(!err) console.log('ok!');
-    });
-
-    Projects.item.create({
-          name: {
-            eng: "first project",
-            ita: "primo progetto"
-          },
-          info: {
-            eng: "info of first project",
-            ita: "informazioni primo progetto"
-          },
-          link: "link"
-      },function(err,data){
-          Projects.all.create({name: {
-            eng: "projects1",
-            ita: "progetti1"
-          },
-          items:
-            [data._id]
-          }, function(err,data){
-          if(!err) console.log(data._id);
-      });});
+    Projects.all.remove({}).exec();
+    Projects.item.remove({}).exec();
+    for (var i=0; i<2;i++){
+      Projects.all.create({name: {
+        eng: loremIpsum({count: 2, units: loremPar[0]}),
+        ita: loremIpsum({count: 2, units: loremPar[0]})
+        },
+          items: []
+        },function(err,dataAll){
+          for (var j=0; j<4;j++){
+            Projects.item.create({
+                  name: {
+                    eng: loremIpsum({count: 2, units: loremPar[0]}),
+                    ita: loremIpsum({count: 2, units: loremPar[0]})
+                  },
+                  info: {
+                    eng: loremIpsum({count: 3, units: loremPar[1]}),
+                    ita: loremIpsum({count: 3, units: loremPar[1]})
+                  },
+                  date: randomDateObj(),
+                  link: loremIpsum({count: 1, units: loremPar[0]})
+              },function(err,dataItems){
+                Projects.all.update({_id:dataAll._id},{$addToSet:{items:dataItems._id}}).exec();
+              });
+            }
+        });
+      }
     },
     skills: function(){
       var Skills = require('../models/Skills');
-      Skills.all.remove({},function(err){
-          if(!err) console.log('ok!');
-      });
-
-      Skills.item.create({
-            name: "prima skill",
-            point: 2
-        },function(err,data){
-            Skills.all.create({
-              name: "primo skill gruppo",
-              items: [data._id]
-            }, function(err,data){
-            if(!err) console.log(data._id);
-        });});
+      Skills.all.remove({}).exec();
+      Skills.item.remove({}).exec();
+      for (var i=0; i<2;i++){
+        Skills.all.create({
+          name: loremIpsum({count: 2, units: loremPar[0]}),
+          items: []
+          },function(err,dataAll){
+            for (var j=0; j<8;j++){
+              Skills.item.create({
+                    name: loremIpsum({count: 1, units: loremPar[0]}),
+                    point: randomInt(1,3)
+                },function(err,dataItems){
+                  Skills.all.update({_id:dataAll._id},{$addToSet:{items:dataItems._id}}).exec();
+                });
+              }
+          });
+        }
       }
 };
 
