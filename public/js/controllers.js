@@ -1,5 +1,28 @@
 "use strict";
 
+var mysiteControllers = angular.module('mysiteControllers',[])
+
+mysiteControllers.controller('HomeCtrl', ['$scope','me','language',
+  function($scope,me,language){
+    $scope.me = me;
+    //console.log(language);
+ }]);
+
+ mysiteControllers.controller('CurriculumCtrl',['$scope','education','experience','skills','language',
+  function ($scope,education,experience,skills,language){
+    $scope.experience = experience;
+    $scope.education = education;
+    $scope.skills = skills;
+  //  console.log(language);
+    $scope.strExperience = language=='ita'?'Esperienze':'Experience';
+  }]);
+
+  mysiteControllers.controller('ProjectsCtrl',['$scope','projects',
+   function ($scope,projects){
+     $scope.projects = projects;
+   }]);
+
+/*
 angular.module('Controllers',[])
 
 .controller('HomeCtrl',['$scope','me',
@@ -23,3 +46,4 @@ function($scope,projects){
 function($scope){
 
 }]);
+*/

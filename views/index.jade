@@ -7,10 +7,11 @@ block body
         li(role='presentation', ng-class="{ active: isActive('/') }")
           a(href='.') Home
         li(role='presentation', ng-class="{ active: isActive('/curriculum') }")
-          a(href='curriculum') Curriculum
+          a(href='/ita/curriculum') Curriculum
         li(role='presentation', ng-class="{ active: isActive('/project') }")
-          a(href='project') Progetti
+          a(href='/ita/projects') Progetti
         li(role='presentation', ng-class="{ active: isActive('/contact') }")
           a(href='contact') Contatti
     .main-content
+
       div(ng-view)
