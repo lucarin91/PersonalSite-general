@@ -2,18 +2,11 @@ var express = require('express');
 var router = express.Router();
 //var authController = require('../controllers/auth');
 //var mongoose = require('mongoose');
-var Education = require('../../models/Education.js');
+var Education = require('../../models/Education');
 
 /* GET /curriculum */
 router.get('/', function(req, res, next) {
-  Education.aggregate({
-   $project : {
-       school: "$school."+req.lang,
-       degree: "$degree."+req.lang,
-       location: 1,
-       score : "$score."+req.lang,
-       date: 1
-   }}, function (err, todos) {
+  Education.get(req.lang, function (err, todos) {
     if (err) return next(err);
     res.json(todos);
   });

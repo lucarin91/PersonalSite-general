@@ -15,48 +15,58 @@ var sys   = require('sys'),
 router.get('/', function(req, res, next) {
   var texPath = path.join(__dirname, '/../../latex');
 
-  var view = {
-    me: {
-      name: 'luca',
-      surname: 'rinaldi',
-      mail:'asd',
-      tel: '324234234234',
-      address: 'asdasdasd'
-    },
-    education:[{
-        school: 'scuola',
-        degree: 'roba',
-        date: {start:"asd",end:"asd"},
-        location: "pisa",
-        score:"tanto"
-      }],
-    language:{
-      native: "italiano",
-      other:[
-        {name:"inglese",level:"B1"}
-      ]
-    },
-    skills:[{
-      name:"skill",
-      items:[{
-        name:"c"
-      }]
-    }]
+  var Me = require('../../models/Me');
+  var Education = require('../../models/Education');
+  var Experience = require('../../models/Experience');
+  var Projects = require('../../models/Projects');
+  var Skills = require('../../models/Skills');
+
+  var view = {formatDate: function () {
+      return function (text, render) {
+        var date = new Date(render(text));
+        return date.getDate()+'/'+ (date.getMonth()+1)+'/'+date.getFullYear();
+      };
+    }
   };
 
-  fs.readFile(texPath+'/cv.tex.template', 'utf8', function (err,data) {
-    if (err) return console.log(err);
-    var tex = mustache.render(data, view);
-    fs.writeFile(texPath+'/cv.tex', tex, function (err) {
-      if (err) return console.log(err);
-      cp.exec('cd '+texPath+' && xelatex -interaction=nonstopmode cv.tex',
-        function (err, stdout, stderr) {
-          var pdf = path.join(texPath, 'cv.pdf');
-          console.log(stdout);
-          res.sendfile(pdf);
+  Me.get(req.lang,function(err,data){
+    console.log(data);
+    view.me = data;
+    Education.get(req.lang,function(err,data){
+      //console.log('education');
+      view.education = data;
+      Experience.get(req.lang,function(err,data){
+        //console.log('experience');
+        view.experience = data;
+        Projects.all.get(req.lang,function(err,data){
+          //console.log(data);
+          view.projects = data;
+          Skills.all.get(function(err,data){
+            view.skills = data;
+            //res.json(view);
+
+            fs.readFile(texPath+'/cv.tex.template', 'utf8', function (err,data) {
+              if (err) return console.log(err);
+              var tex = mustache.render(data, view);
+              fs.writeFile(texPath+'/cv.tex', tex, function (err) {
+                if (err) return console.log(err);
+                cp.exec('cd '+texPath+' && xelatex -interaction=nonstopmode cv.tex',
+                  function (err, stdout, stderr) {
+                    var pdf = path.join(texPath, 'cv.pdf');
+                    //console.log(stdout);
+                    console.log('err: '+err);
+                    //console.log('stderr: '+stderr);
+                    //console.log('stdout: '+stdout);
+                    //if(err) return next(new Error('latex compilation error!',err));
+                    res.sendfile(pdf);
+                  });
+                });
+              });
+          });
         });
       });
     });
+  });
 });
 
 module.exports = router;

@@ -11,6 +11,10 @@ var item = new Schema({
     point: {type:Number, required:true}
 });
 
+GroupSkills.statics.get = function(cb){
+  return this.find({}).populate({path:'items'}).exec(cb);
+};
+
 module.exports = {
                     all: mongoose.model('Skills', GroupSkills),
                     item: mongoose.model('SItems',item)

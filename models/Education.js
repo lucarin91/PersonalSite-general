@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var TodoSchema = new Schema({
+var education = new Schema({
     date: {
       begin: {type: Date, required:true},
       end: {type: Date}
@@ -21,4 +21,15 @@ var TodoSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Education', TodoSchema);
+education.statics.get = function(lang,cb){
+  return this.model('Education').aggregate({
+   $project : {
+       school: "$school."+lang,
+       degree: "$degree."+lang,
+       location: 1,
+       score : "$score."+lang,
+       date: 1
+   }}, cb);
+};
+
+module.exports = mongoose.model('Education', education);

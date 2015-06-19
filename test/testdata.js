@@ -5,7 +5,7 @@ var randomInt = function(min,max){
 };
 
 function randomDate(start, end) {
-    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()))
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
 var randomDateObj = function(){
@@ -13,7 +13,7 @@ var randomDateObj = function(){
   return {
     begin: begin,
     end: randomDate(begin,new Date())
-  }
+  };
 };
 
 var test={
@@ -21,17 +21,22 @@ var test={
     var Me = require('../models/Me.js');
     Me.remove({}).exec();
     Me.create({
+      name: 'Mario',
+      surname: 'Rossi',
+      email: 'mario.rossi@gmail.com',
+      telephone: '+39455 4567888',
+      address: loremIpsum({count: 4, units: loremPar[0]}),
       bio:  {
         eng: loremIpsum({count: 2, units: 'paragraphs'/*words,sentences,paragraphs*/ }),
         ita: loremIpsum({count: 2, units: 'paragraphs'})
       },
-      img:  "/img/luca.jpg"
+      img: 'http://lorempixel.com/200/200/abstract/'
     });
   },
   experience: function(){
     var Experience = require('../models/Experience');
     Experience.remove({}).exec();
-    for (var i=0; i<5; i++){
+    for (var i=0; i<4; i++){
       Experience.create({
           date: randomDateObj(),
           company: loremIpsum({count: 2, units: loremPar[0] }),
@@ -41,10 +46,10 @@ var test={
           },
           location: loremIpsum({count: 1, units: loremPar[0]}),
           info: {
-            eng: loremIpsum({count: 3, units: loremPar[1]}),
-            ita: loremIpsum({count: 3, units: loremPar[1]})
+            eng: loremIpsum({count: 2, units: loremPar[1]}),
+            ita: loremIpsum({count: 2, units: loremPar[1]})
           },
-          link:loremIpsum({count: 1, units: loremPar[0]})
+          link: 'http://'+loremIpsum({count: 1, units: loremPar[0]})
       });
     }
   },
@@ -56,7 +61,7 @@ var test={
     for(var i=0;i<3;i++){
       Education.create({
           date: randomDateObj(),
-          shool: {
+          school: {
             eng: loremIpsum({count: 2, units: loremPar[0]}),
             ita: loremIpsum({count: 2, units: loremPar[0]})
           },
@@ -83,18 +88,18 @@ var test={
         },
           items: []
         },function(err,dataAll){
-          for (var j=0; j<4;j++){
+          for (var j=0; j<3;j++){
             Projects.item.create({
                   name: {
                     eng: loremIpsum({count: 2, units: loremPar[0]}),
                     ita: loremIpsum({count: 2, units: loremPar[0]})
                   },
                   info: {
-                    eng: loremIpsum({count: 3, units: loremPar[1]}),
-                    ita: loremIpsum({count: 3, units: loremPar[1]})
+                    eng: loremIpsum({count: 2, units: loremPar[1]}),
+                    ita: loremIpsum({count: 2, units: loremPar[1]})
                   },
                   date: randomDateObj(),
-                  link: loremIpsum({count: 1, units: loremPar[0]})
+                  link: 'http://'+loremIpsum({count: 1, units: loremPar[0]})
               },function(err,dataItems){
                 Projects.all.update({_id:dataAll._id},{$addToSet:{items:dataItems._id}}).exec();
               });

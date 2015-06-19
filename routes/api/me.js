@@ -6,11 +6,7 @@ var Me = require('../../models/Me.js');
 
 /* GET /me listing. */
 router.get('/', function(req, res, next) {
-  Me.aggregate({
-   $project : {
-       bio : "$bio."+req.lang,
-       img: 1
-   }}, function (err, todos) {
+  Me.get(req.lang, function (err, todos) {
     if (err) return next(err);
     res.json(todos[0]);
   });

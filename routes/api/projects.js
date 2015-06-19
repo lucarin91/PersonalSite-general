@@ -27,21 +27,9 @@ router.get('/', function(req, res, next) {
     }
     res.json(todos);
   });*/
-  Projects.all.find({}).populate({path:'items'}) // only works if we pushed refs to children
-    .exec(function (err, todos) {
-        if (err) return next(err);
-        //provvisorio capire come farlo fare a mongoDB
-        for (var i=0;i<todos.length;i++){
-          todos[i].name = todos[i].name[req.lang]
-          var items = todos[i].items;
-          for (var j=0;j<items.length;j++){
-            if (items[j].name)
-              items[j].name = items[j].name[req.lang];
-            if (items[j].info)
-              items[j].info = items[j].info[req.lang];
-          }
-        }
-        res.json(todos);
+  Projects.all.get(req.lang, function(err,data){
+    if (err) return next(err);
+    res.json(data);
   });
 });
 

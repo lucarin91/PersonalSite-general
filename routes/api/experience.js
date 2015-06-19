@@ -6,15 +6,7 @@ var Experience = require('../../models/Experience');
 
 /* GET /curriculum */
 router.get('/', function(req, res, next) {
-  Experience.aggregate({
-   $project : {
-       company:1,
-       info : "$info."+req.lang,
-       role : "$role."+req.lang,
-       date: 1,
-       location:1,
-       link:1
-   }}, function (err, todos) {
+  Experience.get(req.lang, function (err, todos) {
     if (err) return next(err);
     res.json(todos);
   });
