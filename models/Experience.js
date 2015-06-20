@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var TodoSchema = new Schema({
+var experience = new Schema({
     date: {
       begin: {type: Date, required:true},
       end: {type: Date}
@@ -19,4 +19,16 @@ var TodoSchema = new Schema({
     link: {type:String}
 });
 
-module.exports = mongoose.model('Experience', TodoSchema);
+experience.statics.get = function(lang,cb){
+  return this.model('Experience').aggregate({
+   $project : {
+       company:1,
+       info : "$info."+lang,
+       role : "$role."+lang,
+       date: 1,
+       location:1,
+       link:1
+   }}, cb);
+};
+
+module.exports = mongoose.model('Experience', experience);

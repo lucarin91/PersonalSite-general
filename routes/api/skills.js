@@ -4,10 +4,9 @@ var Skills = require('../../models/Skills');
 
 /* GET /skills listing. */
 router.get('/', function(req, res, next) {
-  Skills.all.find({}).populate({path:'items'}) // only works if we pushed refs to children
-    .exec(function (err, todos) {
-        if (err) return next(err);
-        res.json(todos);
+  Skills.all.get(function (err, todos) {
+      if (err) return next(err);
+      res.json(todos);
   });
 });
 

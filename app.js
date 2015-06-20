@@ -4,7 +4,7 @@
 var express = require('express'),
   bodyParser = require('body-parser'),
   methodOverride = require('method-override'),
-  errorHandler = require('errorhandler'),
+  errorhandler = require('errorhandler'),
   morgan = require('morgan'),
   http = require('http'),
   path = require('path');
@@ -103,11 +103,13 @@ app.use(function(req, res, next) {
 
 // development only
 if (env === 'development') {
-  app.use(errorHandler());
+  console.log('error_development');
+  app.use(errorhandler());
   // development error handler
   // will print stacktrace
   /*app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
+    console.log(err);
+    res.status(err.status = (err.status || 500));
     res.render('error', {
       message: err.message,
       error: err
@@ -117,10 +119,12 @@ if (env === 'development') {
 
 // production only
 if (env === 'production') {
+  console.log('error_production');
   // production error handler
   // no stacktraces leaked to user
   app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
+    console.log(err);
+    res.status(err.status = (err.status || 500));
     res.render('error', {
       message: err.message,
       error: {}
