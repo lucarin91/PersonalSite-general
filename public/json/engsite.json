@@ -1,0 +1,21 @@
+
+ { 
+    "index":
+        {
+            "main-menu":
+                      {
+                            "home":"Home",
+                            "curriculum":"Curriculum",
+                            "projects":"Projects",
+                            "contacts":"Contacts"
+                      }
+                      
+          },
+		"curriculum":
+         {
+           "experience":"Experience",
+           "education":"Education",
+           "skills":"Skills"
+         } 
+        
+  }

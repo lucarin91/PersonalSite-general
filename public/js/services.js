@@ -51,8 +51,7 @@ mysiteServices.factory('ProjectsService',['$resource',
 
 // Demonstrate how to register services
 // In this case it is a simple value service.
-/*angular.module('Services',[])
-.factory('JsonLoader',['$http',
+mysiteServices.factory('JsonLoader',['$http',
   function($http){
     return {
       get: function(path){
@@ -63,4 +62,3 @@ mysiteServices.factory('ProjectsService',['$resource',
       }
     }
 }]);
-*/
