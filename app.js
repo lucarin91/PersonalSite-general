@@ -69,7 +69,7 @@ mongoose.connect('mongodb://'+app.get('mongodb_uri')+'/personal', function(err) 
             latex: require('./routes/api/latex')};
 
 // serve index and view partials
-app.use('/', index);
+//app.use('/', index);
 app.use('/html', partials);
 // JSON API
 app.use('/api/:lang',function(req,res,next){

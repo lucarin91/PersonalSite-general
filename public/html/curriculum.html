@@ -1,0 +1,44 @@
+<container-fluid>
+  <div class="row">
+    <h1>{{strExperience}}</h1>
+    <div class="col-md-6">
+      <ul>
+        <li ng-repeat="exp in experience">{{exp.company}}
+          <ul>
+            <li>{{exp.date.begin}}</li>
+            <li>{{exp.date.end}}</li>
+            <li>{{exp.location}}</li>
+            <li>{{exp.info}}</li>
+            <li>{{exp.role}}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h1>Educazione</h1>
+    <div class="col-md-6">
+      <ul>
+        <li ng-repeat="edu in education">{{edu.location}}
+          <ul>
+            <li>{{edu.score}}</li>
+            <li>{{edu.degree}}</li>
+            <li>{{edu.date.begin}}</li>
+            <li>{{edu.date.end}}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <h1>Skills</h1>
+      <ul>
+        <li ng-repeat="skill in skills">{{skill.name}}
+          <ul ng-repeat="item in skill.items">
+            <li>{{item.name}}</li>
+            <li>{{item.point}}</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</container-fluid>
