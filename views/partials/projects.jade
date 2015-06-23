@@ -1,4 +1,5 @@
 div
+  h1 {{siteText.data.projects.title}}
   .row(ng-repeat='cat in projects')
     h4.col-sm-12(ng-bind='cat.name')
     .col-sm-6(ng-repeat='p in cat.items')

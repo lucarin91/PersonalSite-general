@@ -1,0 +1,27 @@
+
+ { 
+    "index":
+        {
+            "main-menu":
+                      {
+                            "home":"Home",
+                            "curriculum":"Curriculum",
+                            "projects":"Progetti",
+                            "contacts":"Contatti"
+                      }
+                      
+          },
+		"curriculum":
+         {
+           "experience":"Experienze",
+           "education":"Educazione",
+           "skills":"Skills"
+         },
+     "projects":
+          {
+            
+            "title":"Progetti"
+          } 
+        
+       
+  }

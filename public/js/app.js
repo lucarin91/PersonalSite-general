@@ -5,7 +5,7 @@ var mysiteApp = angular.module('mysiteApp',[
   'mysiteControllers',
   'mysiteServices'
 ]);
-
+/*
 mysiteApp.run( function($rootScope, $location, language) {
     // register listener to watch route changes
     $rootScope.$on( "$routeChangeStart", function(event, next, current) {
@@ -13,7 +13,21 @@ mysiteApp.run( function($rootScope, $location, language) {
         //console.log();
       })
     });
-
+*
+mysiteApp.run(['$rootScope','JsonLoader', function($rootScope,JsonLoader) {
+    $rootScope.$on("$routeChangeStart", function (event, next, current) {
+        if (next.params.lang=='ita') {
+           console.log("italiani");
+            $rootScope.siteText =  JsonLoader.get('/json/itasite.json');
+             console.log($rootScope.siteText);
+        }
+        else {
+          console.log("inglesei");
+             $rootScope.siteText = JsonLoader.get('/json/engsite.json');
+        }
+  });
+}]);
+*/
 mysiteApp.config (['$routeProvider','$locationProvider',
   function($routeProvider,$locationProvider){
     $routeProvider.
@@ -22,7 +36,15 @@ mysiteApp.config (['$routeProvider','$locationProvider',
         controller: 'HomeCtrl',
         resolve: {
           me:function(MeService, $route){
-            return MeService.getMe({language:$route.current.params.lang})
+            return MeService.getMe({language:$route.current.params.lang});
+          },
+          siteText:function(JsonLoader,$route){ // the text for the template site:english or italian
+              if($route.current.params.lang =='ita'){
+                return JsonLoader.get('/json/itasite.json');
+              }
+              else{
+                 return JsonLoader.get('/json/engsite.json');
+              }
           }
         }
       }).
@@ -38,6 +60,14 @@ mysiteApp.config (['$routeProvider','$locationProvider',
           },
           skills : function(SkillsService, $route){
             return SkillsService.getSkills({language :$route.current.params.lang});
+          },
+          siteText:function(JsonLoader,$route){ // the text for the template site:english or italian
+              if($route.current.params.lang =='ita'){
+                return JsonLoader.get('/json/itasite.json');
+              }
+              else{
+                 return JsonLoader.get('/json/engsite.json');
+              }
           }
         }
       }).

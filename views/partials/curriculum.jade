@@ -1,6 +1,6 @@
 container-fluid
     .row
-        h1 {{strExperience}}
+        h1 {{siteText.data.curriculum.experience}}
         |       
         .col-md-6
           ul
@@ -17,7 +17,7 @@ container-fluid
                 |                 
                 li {{exp.role}}
         |       
-        h1 Educazione
+        h1 {{siteText.data.curriculum.education}}
         |       
         .col-md-6
           ul
@@ -34,7 +34,7 @@ container-fluid
     |   
     .container-fluid
       .row
-        h1 Skills
+        h1 {{siteText.data.curriculum.skills}}
         |       
         ul
           li(ng-repeat='skill in skills')
