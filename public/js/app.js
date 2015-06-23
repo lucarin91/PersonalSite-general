@@ -32,7 +32,7 @@ mysiteApp.config (['$routeProvider','$locationProvider',
   function($routeProvider,$locationProvider){
     $routeProvider.
       when('/:lang/me', {
-        templateUrl: 'html/me',
+        templateUrl: 'html/me.html',
         controller: 'HomeCtrl',
         resolve: {
           me:function(MeService, $route){
@@ -49,7 +49,7 @@ mysiteApp.config (['$routeProvider','$locationProvider',
         }
       }).
       when('/:lang/curriculum',{
-        templateUrl: 'html/curriculum',
+        templateUrl: 'html/curriculum.html',
         controller: 'CurriculumCtrl',
         resolve: {
           education:function(EducationService, $route){
@@ -72,7 +72,7 @@ mysiteApp.config (['$routeProvider','$locationProvider',
         }
       }).
       when('/:lang/projects',{
-        templateUrl: 'html/projects',
+        templateUrl: 'html/projects.html',
         controller: 'ProjectsCtrl',
         resolve: {
           projects:function(ProjectsService, $route){

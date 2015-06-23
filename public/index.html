@@ -17,17 +17,18 @@
     <script src="js/directives.js"></script>
   </head>
   <body>
-    <div class="container main"></div>
-    <div class="main-menu">
-      <ul class="nav nav-tabs">
-        <li role="presentation" ng-class="{ active: isActive('/') }"><a href=".">Home</a></li>
-        <li role="presentation" ng-class="{ active: isActive('/curriculum') }"><a href="/ita/curriculum">Curriculum</a></li>
-        <li role="presentation" ng-class="{ active: isActive('/project') }"><a href="/ita/projects">Progetti</a></li>
-        <li role="presentation" ng-class="{ active: isActive('/contact') }"><a href="contact">Contatti</a></li>
-      </ul>
-    </div>
-    <div class="main-content">
-      <div ng-view="ng-view"></div>
-    </div>
+    <div class="container main">
+      <div class="main-menu">
+        <ul class="nav nav-tabs">
+          <li role="presentation" ng-class="{ active: isActive('/') }"><a href=".">Home</a></li>
+          <li role="presentation" ng-class="{ active: isActive('/curriculum') }"><a href="/ita/curriculum">Curriculum</a></li>
+          <li role="presentation" ng-class="{ active: isActive('/project') }"><a href="/ita/projects">Progetti</a></li>
+          <li role="presentation" ng-class="{ active: isActive('/contact') }"><a href="contact">Contatti</a></li>
+        </ul>
+      </div>
+      <div class="main-content">
+        <div ng-view="ng-view"></div>
+      </div>
+  </div>
   </body>
 </html>
