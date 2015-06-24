@@ -3,7 +3,8 @@
 var mysiteApp = angular.module('mysiteApp',[
   'ngRoute',
   'mysiteControllers',
-  'mysiteServices'
+  'mysiteServices',
+  'mysiteDirectives'
 ]);
 /*
 mysiteApp.run( function($rootScope, $location, language) {

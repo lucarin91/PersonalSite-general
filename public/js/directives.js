@@ -2,7 +2,7 @@
 
 /* Directives */
 
-angular.module('Directives', [])
+angular.module('mysiteDirectives', [])
   .directive('appVersion', function (version) {
     return function(scope, elm, attrs) {
       elm.text(version);
@@ -14,28 +14,29 @@ angular.module('Directives', [])
     restrict : 'E',
     /*replace: true,*/
     trasclude:true,
-    link : function(scope, element, attrs) {
-      scope.modVar = false;
-      scope.modify = function(){
-        scope.modVar=!scope.modVar;
-      };
-      var render = function() {
-        var mod = scope.modVar;
-        console.log(element.text());
-        var button = '<button ng-click="modify()" type="button">mod!</button>';
-        if (mod) {
-          element.html('<input value="'+element.text()+'"></input>'+button);
-        }else {
-          element.html(element.text()+button);
+    templateUrl: '/html/template/testinput.html',
+    //template: '<div ng-hide="mod" ng-bind="{{text}}"></div><input ng-show="modify" value="{{text}}"/>',
+    replace: true,
+    scope: {
+            mod: '=',
+            text: '='
         }
-      };
-      //key point here to watch for changes of the type property
-      scope.$watch(scope.modVar, function(newValue, oldValue) {
-        console.log('watch!');
-        render();
-      });
-
-      render();
-    }
   };
+})
+  .directive('modbutton', function() {
+    return {
+      restrict : 'E',
+      /*replace: true,*/
+      trasclude:true,
+      template: '<button ng-click="click()">mod!</button>',
+      controller: function($scope, $element){
+         $scope.click = function(){
+           $scope.mod = !$scope.mod;
+         };
+      },
+      replace: true,
+      scope: {
+              mod: '='
+          }
+    };
 });

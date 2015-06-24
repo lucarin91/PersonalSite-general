@@ -7,6 +7,14 @@ mysiteControllers.controller('HomeCtrl', ['$scope','me','language','siteText',
   function($scope,me,language,siteText){
     $scope.me = me;
     $scope.siteText = siteText;
+
+    $scope.test = 'ciao!';
+    $scope.mod = false;
+  /*  $scope.click = function(){
+      console.log('click!');
+      $scope.mod = !$scope.mod;
+      console.log($scope.mod);*/
+    //};
  }]);
 
  mysiteControllers.controller('CurriculumCtrl',['$scope','education','experience','skills','language','siteText',
@@ -15,7 +23,7 @@ mysiteControllers.controller('HomeCtrl', ['$scope','me','language','siteText',
     $scope.education = education;
     $scope.skills = skills;
     $scope.siteText = siteText;
-    
+
   }]);
 
   mysiteControllers.controller('ProjectsCtrl',['$scope','projects',
