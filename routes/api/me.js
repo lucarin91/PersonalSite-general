@@ -8,7 +8,7 @@ var Me = require('../../models/Me.js');
 router.get('/', function(req, res, next) {
   Me.get(req.lang, function (err, todos) {
     if (err) return next(err);
-    res.json(todos[0]);
+    res.json(todos);
   });
 });
 
