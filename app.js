@@ -91,7 +91,7 @@ app.use('/api/*/latex', api.latex);
 //app.use('*', index);
 
 app.use('*', function(req,res,next){
-  res.redirect('/');
+  res.sendfile(__dirname + '/public/index.html');
 });
 
 /**
