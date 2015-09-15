@@ -9,7 +9,7 @@ ENV HOME /root
 CMD ["/sbin/my_init"]
 
 #Install Latex
-RUN apt-get update && apt-get install texlive-latex-base texlive-latex-extra texlive-latex-recommended texlive-base texlive-science texlive-xetex texlive-lang-italian texlive-lang-english -y
+#RUN apt-get update && apt-get install texlive-latex-base texlive-latex-extra texlive-latex-recommended texlive-base texlive-science texlive-xetex texlive-lang-italian texlive-lang-english -y
 
 ### In Dockerfile:
 RUN mkdir -p /etc/my_init.d
