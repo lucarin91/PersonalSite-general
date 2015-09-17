@@ -1,9 +1,82 @@
-.main{
-  width:650px;
+body{
+  background-color: #1d2026;
 }
-.main-menu{
+
+.main{
+  width:700px;
+}
+
+.menu-row{
+  height:100px;
+  border: 15px solid transparent;
+  padding: 15px;
+  color: white;
 
 }
+.menu-row-1{
+  -webkit-border-image: url(img/laser_centrale.png) 40 30 stretch; /* Safari 3.1-5 */
+  -o-border-image: url(img/laser_centrale.png) 40 30 stretch; /* Opera 11-12.1 */
+  border-image: url(/img/border-start.png) 40 30 stretch;
+  height: 110px;
+}
+.menu-row-2{
+  -webkit-border-image: url(img/laser_centrale.png) 60 10 stretch; /* Safari 3.1-5 */
+  -o-border-image: url(img/laser_centrale.png) 60 10 stretch; /* Opera 11-12.1 */
+  border-image: url(/img/border1.png) 40 30 stretch;
+  border-top: 0px;
+}
+.menu-row-3{
+  border-image: url(/img/border2.png) 40 30 stretch;
+  border-top: 0px;
+}
+.menu-row-4{
+  border-image: url(/img/border1.png) 40 30 stretch;
+  border-top: 0px;
+}
+.menu-row-5{
+  border-image: url(/img/border2.png) 40 30 stretch;
+  border-top: 0px;
+}
+.menu-row-6{
+  border-image: url(/img/border-end.png) 40 30 stretch;
+  /*height: 120px;*/
+}
+
+.menu-row-left{
+  text-align: left;
+}
+.menu-row-right{
+  text-align: right;
+}
+
+.menu-row-active{
+  height: auto;
+  min-height: 100px;
+}
+.menu-row-active .menu-title a{
+  color: white;
+  text-decoration: underline;
+}
+
+.menu-title a{
+  font-size: 30px;
+  font-family: monospace;
+  color: rgba(255, 255, 255, 0.48);
+}
+.menu-title-center{
+  text-align: center;
+}
+.menu-title-left{
+  text-align: left;
+}
+.menu-title-right{
+  text-align: right;
+}
+
+.test{
+  height: 400px;
+}
+
 .main-content{
   margin: 20px 0;
 }

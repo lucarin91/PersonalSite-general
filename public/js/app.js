@@ -1,11 +1,98 @@
 'use strict';
 
 var mysiteApp = angular.module('mysiteApp',[
-  'ngRoute',
+  //'ngRoute',
+  'ui.router',
   'mysiteControllers',
   'mysiteServices',
   'mysiteDirectives'
-]);
+])
+
+.run(['$rootScope', function($rootScope) {
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+      console.log(toState);
+      console.log(fromState);
+      //event.preventDefault();
+      // transitionTo() promise will be rejected with
+      // a 'transition prevented' error
+  })
+}])
+.controller('menuController',function($scope, $state){
+  var current = null;
+  $scope.goto = function(route){
+    if (route===current)
+      route='home';
+    current=route;
+    $state.go(route);
+  };
+
+  $scope.isActive = function(route){
+    console.log($state.is(route));
+    return $state.is(route);
+  }
+})
+
+.config(function($stateProvider, $locationProvider){
+    $stateProvider
+        .state('home', {
+            url: ""
+        })
+        .state('bio', {
+            url: "/bio",
+            views: {
+                "view.bio": {
+                    templateUrl: "html/test.html"
+                }
+            },
+            onEnter: function(){
+              console.log('enter');
+            },
+            onExit: function(){
+              console.log('exit');
+            }
+        })
+        .state('education', {
+            url: "/education",
+            views: {
+                "view.education": {
+                    template: "index.viewA"
+                }
+            }
+        })
+        .state('experience', {
+            url: "/experience",
+            views: {
+                "view.experience": {
+                    template: "index.viewA"
+                }
+            }
+        })
+        .state('skills', {
+            url: "/skills",
+            views: {
+                "view.skills": {
+                    template: "index.viewA"
+                }
+            }
+        })
+        .state('projects', {
+            url: "/projects",
+            views: {
+                "view.projects": {
+                    template: "index.viewA"
+                }
+            }
+        })
+        .state('contacts', {
+            url: "/contacts",
+            views: {
+                "view.contacts": {
+                    template: "index.viewA"
+                }
+            }
+        })
+        $locationProvider.html5Mode(true);
+    });
 /*
 mysiteApp.run( function($rootScope, $location, language) {
     // register listener to watch route changes
@@ -29,7 +116,7 @@ mysiteApp.run(['$rootScope','JsonLoader', function($rootScope,JsonLoader) {
   });
 }]);
 */
-mysiteApp.config (['$routeProvider','$locationProvider',
+/*mysiteApp.config (['$routeProvider','$locationProvider',
   function($routeProvider,$locationProvider){
     $routeProvider.
       when('/:lang/me', {
@@ -90,12 +177,14 @@ mysiteApp.config (['$routeProvider','$locationProvider',
           }
         }
       })*/
+      /*
       .otherwise({
         redirectTo: '/ita/me'
       });
       // configure html5 to get links working on jsfiddle
       $locationProvider.html5Mode(true);
   }]);
+  */
 /*
 angular.module('PersonalSite',[
   'ngRoute',
