@@ -35,7 +35,7 @@
 
       <div class="container main" ng-controller="menuController">
         <div class="row">
-          <div class="col-sm-12 menu-row menu-row-center menu-row-1" ng-class="{'menu-row-active': isActive('bio')}">
+          <div class="col-sm-12 menu-row menu-row-cegithubnter menu-row-1" ng-class="{'menu-row-active': isActive('bio')}">
             <div class="menu-title menu-title-center"><a href="" ng-click="goto('bio')">Luca Rinaldi</a></div>
             <div class="menu-" ui-view="view.bio"></div>
           </div>
@@ -68,6 +68,12 @@
           <div class="col-sm-12 menu-row menu-row-right menu-row-6" ng-class="{'menu-row-active': isActive('contacts')}">
             <div class="menu-title menu-title-right"><a href="" ng-click="goto('contacts')">Contacts</a></div>
             <div ui-view="view.contacts"></div>
+          </div>
+        </div>
+        <div class="row footer">
+          <div class="col-sm-12">
+            <div class="language"> ITA|ENG </div>
+            <img src="img/firma-cristina.png"></img>
           </div>
         </div>
       </div>
