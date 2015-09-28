@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
 var item = new Schema({
   name: {
     eng: {type:String},
@@ -15,18 +14,37 @@ var item = new Schema({
   date: {
     begin: {type: Date},
     end: {type: Date}
+  },
+  category: { type: Schema.Types.ObjectId, ref: 'Projects' }
+},
+  {
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
   }
+);
 
+item.virtual('id')
+.get(function () {
+  return this._id.toHexString();
 });
 
 var projects = new Schema({
-    name: {
-      eng: {type:String},
-      ita: {type:String}
-    },
-    items:[{ type: Schema.Types.ObjectId, ref: 'PItem' }]
-  });
+  name: {
+    eng: {type:String},
+    ita: {type:String}
+  }
+},
+  {
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
+  }
+);
 
+projects.virtual('id')
+.get(function () {
+  return this._id.toHexString();
+});
+/*
 projects.statics.get = function(lang,cb){
   this.find({}).populate({path:'items'}) // only works if we pushed refs to children
     .exec(function (err, todos) {
@@ -49,6 +67,6 @@ projects.statics.get = function(lang,cb){
         console.log(res);
         cb(err,res);
   });
-};
+};*/
 
 module.exports = {all:mongoose.model('Projects', projects),item:mongoose.model('PItem',item)};

@@ -1,21 +1,41 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var GroupSkills = new Schema({
-  name: {type:String, required:true},
-  items: [{ type: Schema.Types.ObjectId, ref: 'SItems' }]
+var groupSkill = new Schema({
+  name: {
+    eng: {type:String},
+    ita: {type:String}
+  }
+},
+  {
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
+  }
+);
+groupSkill.virtual('id')
+.get(function () {
+  return this._id.toHexString();
 });
 
 var item = new Schema({
     name: {type:String, required:true},
-    point: {type:Number, required:true}
+    point: {type:Number, required:true},
+    category: { type: Schema.Types.ObjectId, ref: 'Skills' }
+},
+  {
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
+  }
+);
+item.virtual('id')
+.get(function () {
+  return this._id.toHexString();
 });
 
-GroupSkills.statics.get = function(cb){
+groupSkill.statics.get = function(cb){
   return this.find({}).populate({path:'items'}).exec(cb);
 };
 
-module.exports = {
-                    all: mongoose.model('Skills', GroupSkills),
+module.exports = {  all: mongoose.model('Skills', groupSkill),
                     item: mongoose.model('SItems',item)
                   };

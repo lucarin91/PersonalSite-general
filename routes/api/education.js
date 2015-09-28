@@ -6,7 +6,18 @@ var Education = require('../../models/Education');
 
 /* GET /curriculum */
 router.get('/', function(req, res, next) {
-  Education.get(req.lang, function (err, todos) {
+  Education.find({}, function (err, todos) {
+    if (err) return next(err);
+    res.json(todos);
+  });
+  /*Education.find({}, function (err, todos) {
+    if (err) return next(err);
+    res.json(todos);
+  });*/
+});
+
+router.get('/:id', function(req, res, next) {
+  Education.findOne({_id:req.params.id}, function (err, todos) {
     if (err) return next(err);
     res.json(todos);
   });
@@ -18,12 +29,12 @@ router.get('/', function(req, res, next) {
 
 /* POST /curriculum */
 router.post('/', /*authController.isAuthenticated,*/ function(req, res, next) {
-  var data = {shool:{},degree:{},score:{},location:req.body.location,date:req.body.date};
+  /*var data = {shool:{},degree:{},score:{},location:req.body.location,date:req.body.date};
   data.school[req.lang] = req.body.school;
   data.degree[req.lang] = req.body.degree;
   data.score[req.lang] = req.body.score;
-  console.log(req.body);
-  Education.create(data, function (err, post) {
+  console.log(req.body);*/
+  Education.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post._id);
   });
@@ -39,7 +50,7 @@ router.delete('/:id', /*authController.isAuthenticated,*/ function(req, res, nex
 
 /* PUT /curriculum/:id */
 router.put('/:id', function(req, res, next) {
-  var query = {$set:{}};
+  /*var query = {$set:{}};
   if (req.body.shcool)
     query.$set["shcool."+req.lang] = req.body.shcool;
   if (req.body.degree)
@@ -47,8 +58,8 @@ router.put('/:id', function(req, res, next) {
   if (req.body.score)
       query.$set["score."+req.lang] = req.body.score;
   if (req.body.date && (req.body.date.begin||req.body.date.end)) query.$set.date = req.body.date;
-  console.log(query);
-  Education.update({_id:req.params.id}, query, function (err, post) {
+  console.log(query);*/
+  Education.update({_id:req.params.id}, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });

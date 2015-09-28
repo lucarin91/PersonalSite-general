@@ -85,9 +85,7 @@ var test={
       Projects.all.create({name: {
         eng: loremIpsum({count: 2, units: loremPar[0]}),
         ita: loremIpsum({count: 2, units: loremPar[0]})
-        },
-          items: []
-        },function(err,dataAll){
+      }}, function(err,dataAll){
           for (var j=0; j<3;j++){
             Projects.item.create({
                   name: {
@@ -99,9 +97,10 @@ var test={
                     ita: loremIpsum({count: 2, units: loremPar[1]})
                   },
                   date: randomDateObj(),
-                  link: 'http://'+loremIpsum({count: 1, units: loremPar[0]})
+                  link: 'http://'+loremIpsum({count: 1, units: loremPar[0]}),
+                  category: dataAll._id
               },function(err,dataItems){
-                Projects.all.update({_id:dataAll._id},{$addToSet:{items:dataItems._id}}).exec();
+                //Projects.all.update({_id:dataAll._id},{$addToSet:{items:dataItems._id}}).exec();
               });
             }
         });
@@ -112,16 +111,17 @@ var test={
       Skills.all.remove({}).exec();
       Skills.item.remove({}).exec();
       for (var i=0; i<2;i++){
-        Skills.all.create({
-          name: loremIpsum({count: 2, units: loremPar[0]}),
-          items: []
-          },function(err,dataAll){
+        Skills.all.create({name: {
+          eng: loremIpsum({count: 2, units: loremPar[0]}),
+          ita: loremIpsum({count: 2, units: loremPar[0]})
+        }},function(err,dataAll){
             for (var j=0; j<8;j++){
               Skills.item.create({
                     name: loremIpsum({count: 1, units: loremPar[0]}),
-                    point: randomInt(1,3)
+                    point: randomInt(1,3),
+                    category: dataAll._id
                 },function(err,dataItems){
-                  Skills.all.update({_id:dataAll._id},{$addToSet:{items:dataItems._id}}).exec();
+                  //Skills.all.update({_id:dataAll._id},{$addToSet:{items:dataItems._id}}).exec();
                 });
               }
           });

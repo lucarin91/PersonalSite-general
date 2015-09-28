@@ -27,7 +27,18 @@ router.get('/', function(req, res, next) {
     }
     res.json(todos);
   });*/
-  Projects.all.get(req.lang, function(err,data){
+  Projects.item.find({}, function(err,data){
+    if (err) return next(err);
+    res.json(data);
+  });
+  /*Projects.all.get(req.lang, function(err,data){
+    if (err) return next(err);
+    res.json(data);
+  });*/
+});
+
+router.get('/:id', function(req, res, next) {
+  Projects.item.findOne({_id:req.params.id}, function(err,data){
     if (err) return next(err);
     res.json(data);
   });
@@ -35,10 +46,11 @@ router.get('/', function(req, res, next) {
 
 /* POST /projects */
 router.post('/',/* authController.isAuthenticated,*/ function(req, res, next) {
-  if (!req.body.name) next(new Error('require name'));
+  /*if (!req.body.name) next(new Error('require name'));
   var data = {name: {} };
   data.name[req.lang]=req.body.name;
-  Projects.all.create(data, function (err, post) {
+  */
+  Projects.item.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post._id);
   });
@@ -47,15 +59,16 @@ router.post('/',/* authController.isAuthenticated,*/ function(req, res, next) {
 /* POST /projects/:id */
 router.post('/:id',/* authController.isAuthenticated,*/ function(req, res, next) {
   if (!req.body.name) next(new Error('require name'));
-  var data = {name: {}, info: {}, link: req.body.link};
+  /*var data = {name: {}, info: {}, link: req.body.link};
   data.name[req.lang] = req.body.name;
   data.info[req.lang] = req.body.info;
-  console.log(data);
-  Projects.item.create(data, function(err,post){
-    Projects.all.update({_id:req.params.id},{$addToSet: {items: post._id}},{safe: true}, function(err,num,data){
-      if (err) return next(err);
-      res.json(post._id);
-    });
+  console.log(data);*/
+  Projects.item.create(req.body, function(err,post){
+    /*Projects.all.update({_id:req.params.id},{$addToSet: {items: post._id}},{safe: true}, function(err,num,data){
+      */
+    if (err) return next(err);
+    res.json(post._id);
+    /*});*/
   });
   /*Projects.update({_id:req.params.id},{$addToSet: {items: data}},{safe: true}, function(err,num,data){
     if (err) return next(err);
@@ -66,10 +79,11 @@ router.post('/:id',/* authController.isAuthenticated,*/ function(req, res, next)
 
 /* PUT /projects/:id */
 router.put('/:id', function(req,res,next){
-  var query = {$set:{}};
+  /*var query = {$set:{}};
   if (req.body.name)
     query.$set["name."+req.lang] = req.body.name;
-  Projects.all.update({_id: req.params.id},query,function(err,post){
+    */
+  Projects.item.update({_id: req.params.id},req.body,function(err,post){
     if (err) return next(err);
     res.json(post);
   });
@@ -77,13 +91,13 @@ router.put('/:id', function(req,res,next){
 
 /* DELETE /projects/:id */
 router.delete('/:id',/* authController.isAuthenticated, */ function(req, res, next) {
-  Projects.all.remove({_id:req.params.id}, function (err, post) {
+  Projects.item.remove({_id:req.params.id}, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
 });
 
-/* PUT /projects/:id_projects/:id_items */
+/* PUT /projects/:id_projects/:id_items
 router.put('/item/:idi', function(req,res,next){
   var query = {$set:{}};
   if (req.body.info)
@@ -100,8 +114,8 @@ router.put('/item/:idi', function(req,res,next){
 
 
 
-/* DELETE /projects/:id_projects/:id_item */
-router.delete('/item/:idi',/* authController.isAuthenticated, */ function(req, res, next) {
+/* DELETE /projects/:id_projects/:id_item *//*
+router.delete('/item/:idi',/* authController.isAuthenticated, *//* function(req, res, next) {
   Projects.item.remove({_id:req.params.idi}, function (err, post) {
     if (err) return next(err);
     Projects.all.update({items: req.params.idi},{$pull: {items: req.params.idi}}, function(err,post){
@@ -109,5 +123,6 @@ router.delete('/item/:idi',/* authController.isAuthenticated, */ function(req, r
     });
   });
 });
+*/
 
 module.exports = router;

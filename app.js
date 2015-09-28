@@ -65,7 +65,9 @@ mongoose.connect('mongodb://'+app.get('mongodb_uri')+'/personal', function(err) 
             experience: require('./routes/api/experience'),
             education: require('./routes/api/education'),
             projects: require('./routes/api/projects'),
+            projectsCat: require('./routes/api/projects-category'),
             skills: require('./routes/api/skills'),
+            skillsCat: require('./routes/api/skills-category'),
             latex: require('./routes/api/latex')};
 
 // serve index and view partials
@@ -84,7 +86,9 @@ app.use('/api/*/me', api.me);
 app.use('/api/*/experience', api.experience);
 app.use('/api/*/education', api.education);
 app.use('/api/*/projects', api.projects);
+app.use('/api/*/projectscat', api.projectsCat);
 app.use('/api/*/skills', api.skills);
+app.use('/api/*/skillscat', api.skillsCat);
 app.use('/api/*/latex', api.latex);
 
 // redirect all others to the index (HTML5 history)

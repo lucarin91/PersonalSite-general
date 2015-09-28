@@ -17,6 +17,15 @@ var experience = new Schema({
       ita: {type:String}
     },
     link: {type:String}
+},
+{
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true }
+});
+
+experience.virtual('id')
+  .get(function () {
+    return this._id.toHexString();
 });
 
 experience.statics.get = function(lang,cb){
