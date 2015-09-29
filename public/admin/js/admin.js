@@ -9,6 +9,23 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     var admin = nga.application('My First Admin')
                 .baseApiUrl('/api/eng/');
     var lang = 'ita';
+
+    var me = nga.entity('me');
+    // add the user entity to the admin application
+    me.editionView().fields([
+      nga.field('name'),
+      nga.field('surname'),
+      nga.field('email'),
+      nga.field('telephone'),
+      nga.field('address'),
+      nga.field('img'),
+      nga.field('bio.eng','text'),
+      nga.field('bio.ita','text')]);
+    me.editionView().url(function() {
+      return 'me'; // Can be absolute or relative
+    });
+    admin.addEntity(me);
+
     var education = nga.entity('education');
     education.listView().fields([
       nga.field('degree.'+lang).isDetailLink(true),
@@ -128,6 +145,24 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     ]);
     skills.editionView().fields(skills.creationView().fields());
     admin.addEntity(skills);
+
+    admin.menu(nga.menu()
+        .addChild(nga.menu()
+            .title('Me')
+            .link('/me/edit/')
+            .active(function(path) {
+                return path.indexOf('/stats') === 0;
+            })
+        )
+        .addChild(nga.menu(education))
+        .addChild(nga.menu(experience))
+        .addChild(nga.menu().title('Projects')
+                  .addChild(nga.menu(projectscat).title('category'))
+                  .addChild(nga.menu(projects).title('list')))
+        .addChild(nga.menu().title('Skills')
+                  .addChild(nga.menu(skillscat).title('category'))
+                  .addChild(nga.menu(skills).title('list')))
+    );
 
     nga.configure(admin);
 }]);
