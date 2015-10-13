@@ -1,9 +1,7 @@
 "use strict";
 
-var mysiteControllers = angular.module('mysiteControllers',[])
-
-
-mysiteControllers.controller('HomeCtrl', ['$scope','me','language','siteText',
+angular.module('mysiteController',[])
+.controller('HomeCtrl', ['$scope','me','language','siteText',
   function($scope,me,language,siteText){
     $scope.me = me;
     $scope.siteText = siteText;
@@ -15,21 +13,23 @@ mysiteControllers.controller('HomeCtrl', ['$scope','me','language','siteText',
       $scope.mod = !$scope.mod;
       console.log($scope.mod);*/
     //};
- }]);
+ }])
 
- mysiteControllers.controller('CurriculumCtrl',['$scope','education','experience','skills','language','siteText',
-  function ($scope,education,experience,skills,language, siteText){
-    $scope.experience = experience;
-    $scope.education = education;
-    $scope.skills = skills;
-    $scope.siteText = siteText;
+.controller('MeCtrl',['$scope','me',
+  function ($scope,me){
+    console.log(me);
+    $scope.me = me;
+}])
 
-  }]);
+.controller('EducationCtrl',['$scope','education','languageServ',
+   function ($scope,education){
+     $scope.e = education;
+}])
 
-  mysiteControllers.controller('ProjectsCtrl',['$scope','projects',
+.controller('ProjectsCtrl',['$scope','projects',
    function ($scope,projects){
      $scope.projects = projects;
-   }]);
+}])
 
 /*
 angular.module('Controllers',[])

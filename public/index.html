@@ -14,10 +14,10 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="/css/main.css"/>
     <script src="js/app.js"></script>
-    <script src="js/services.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/filters.js"></script>
-    <script src="js/directives.js"></script>
+    <script src="js/service.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/filter.js"></script>
+    <script src="js/directive.js"></script>
   </head>
   <body>
     <!--<div class="container main">
@@ -35,9 +35,9 @@
 
       <div class="container main" ng-controller="menuController">
         <div class="row">
-          <div class="col-sm-12 menu-row menu-row-cegithubnter menu-row-1" ng-class="{'menu-row-active': isActive('bio')}">
-            <div class="menu-title menu-title-center"><a href="" ng-click="goto('bio')">Luca Rinaldi</a></div>
-            <div class="menu-" ui-view="view.bio"></div>
+          <div class="col-sm-12 menu-row menu-row-cegithubnter menu-row-1" ng-class="{'menu-row-active': isActive('me')}">
+            <div class="menu-title menu-title-center"><a href="" ng-click="goto('me')">Luca Rinaldi</a></div>
+            <div ui-view="view.me"></div>
           </div>
         </div>
         <div class="row">

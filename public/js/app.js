@@ -3,15 +3,15 @@
 var mysiteApp = angular.module('mysiteApp',[
   //'ngRoute',
   'ui.router',
-  'mysiteControllers',
-  'mysiteServices',
+  'mysiteController',
+  'mysiteService',
   'mysiteDirectives'
 ])
 
 .run(['$rootScope', function($rootScope) {
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-      console.log(toState);
-      console.log(fromState);
+      //console.log(toState);
+      //console.log(fromState);
       //event.preventDefault();
       // transitionTo() promise will be rejected with
       // a 'transition prevented' error
@@ -27,7 +27,7 @@ var mysiteApp = angular.module('mysiteApp',[
   };
 
   $scope.isActive = function(route){
-    console.log($state.is(route));
+    //console.log($state.is(route));
     return $state.is(route);
   }
 })
@@ -37,26 +37,34 @@ var mysiteApp = angular.module('mysiteApp',[
         .state('home', {
             url: ""
         })
-        .state('bio', {
-            url: "/bio",
+        .state('me', {
+            url: "/me",
             views: {
-                "view.bio": {
-                    templateUrl: "html/test.html"
+                "view.me": {
+                    templateUrl: "html/me.html",
+                    controller: 'MeCtrl',
+                    resolve: {
+                      me: function(APIService){
+                        console.log('resolveMe');
+                        return APIService.me.get();
+                      }
+                    }
                 }
-            },
-            onEnter: function(){
-              console.log('enter');
-            },
-            onExit: function(){
-              console.log('exit');
-            }
+          }
         })
         .state('education', {
             url: "/education",
             views: {
                 "view.education": {
-                    template: "index.viewA"
-                }
+                    templateUrl: "html/education.html",
+                    controller: 'EducationCtrl',
+                    resolve: {
+                      education: function(APIService){
+                        console.log('resolveMe');
+                        return APIService.edu.query();
+                      }
+                    }
+                  }
             }
         })
         .state('experience', {

@@ -74,22 +74,22 @@ mongoose.connect('mongodb://'+app.get('mongodb_uri')+'/personal', function(err) 
 //app.use('/', index);
 //app.use('/html', partials);
 // JSON API
-app.use('/api/:lang',function(req,res,next){
+/*app.use('/api/:lang',function(req,res,next){
   if (req.params.lang =='ita' || req.params.lang =='eng'){
     req.lang = req.params.lang;
     next();
   }else {
     next(new Error('Lingua non riconosciuta!'));
   }
-});
-app.use('/api/*/me', api.me);
-app.use('/api/*/experience', api.experience);
-app.use('/api/*/education', api.education);
-app.use('/api/*/projects', api.projects);
-app.use('/api/*/projectscat', api.projectsCat);
-app.use('/api/*/skills', api.skills);
-app.use('/api/*/skillscat', api.skillsCat);
-app.use('/api/*/latex', api.latex);
+});*/
+app.use('/api/me', api.me);
+app.use('/api/experience', api.experience);
+app.use('/api/education', api.education);
+app.use('/api/projects', api.projects);
+app.use('/api/projectscat', api.projectsCat);
+app.use('/api/skills', api.skills);
+app.use('/api/skillscat', api.skillsCat);
+app.use('/api/latex', api.latex);
 
 // redirect all others to the index (HTML5 history)
 //app.use('*', index);
