@@ -12,7 +12,7 @@ angular.module('mysiteService', ['ngResource'])
     setEng: function(){
       language='eng';
     },
-    get: function(){
+    get: function(property){
       return language;
     }
   }

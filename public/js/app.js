@@ -5,7 +5,8 @@ var mysiteApp = angular.module('mysiteApp',[
   'ui.router',
   'mysiteController',
   'mysiteService',
-  'mysiteDirectives'
+  'mysiteDirectives',
+  'mySiteFilter'
 ])
 
 .run(['$rootScope', function($rootScope) {

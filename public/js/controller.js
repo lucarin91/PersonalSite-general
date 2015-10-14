@@ -21,8 +21,9 @@ angular.module('mysiteController',[])
     $scope.me = me;
 }])
 
-.controller('EducationCtrl',['$scope','education','languageServ',
+.controller('EducationCtrl',['$scope','education',
    function ($scope,education){
+     console.log(education);
      $scope.e = education;
 }])
 
