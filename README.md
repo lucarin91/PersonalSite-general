@@ -1,4 +1,7 @@
 #PersonalSite
+##Admin Pannel
+The amministrative pannel can be rich from `/admin`, but for now it have to be used only in development; because it doen't have any type of autentication and it show only italian data, but never than less it can modify also english data.
+
 
 ##Back-end API
 Principle Path: `/api/eng|ita`
