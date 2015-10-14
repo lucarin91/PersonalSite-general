@@ -7,7 +7,7 @@ var myApp = angular.module('myApp', [
 myApp.config(['NgAdminConfigurationProvider', function (nga) {
     // create an admin application
     var admin = nga.application('My First Admin')
-                .baseApiUrl('/api/eng/');
+                .baseApiUrl('/api/');
     var lang = 'ita';
 
     var me = nga.entity('me');
