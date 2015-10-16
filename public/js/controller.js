@@ -1,36 +1,52 @@
 "use strict";
 
-angular.module('mysiteController',[])
-.controller('HomeCtrl', ['$scope','me','language','siteText',
-  function($scope,me,language,siteText){
-    $scope.me = me;
-    $scope.siteText = siteText;
+angular.module('mysiteController', [])
+  .controller('HomeCtrl', ['$scope', 'me', 'language', 'siteText',
+    function($scope, me, language, siteText) {
+      $scope.me = me;
+      $scope.siteText = siteText;
 
-    $scope.test = 'ciao!';
-    $scope.mod = false;
-  /*  $scope.click = function(){
-      console.log('click!');
-      $scope.mod = !$scope.mod;
-      console.log($scope.mod);*/
-    //};
- }])
+      $scope.test = 'ciao!';
+      $scope.mod = false;
+      /*  $scope.click = function(){
+          console.log('click!');
+          $scope.mod = !$scope.mod;
+          console.log($scope.mod);*/
+      //};
+    }
+  ])
 
-.controller('MeCtrl',['$scope','me',
-  function ($scope,me){
+.controller('MeCtrl', ['$scope', 'me',
+  function($scope, me) {
     console.log(me);
     $scope.me = me;
-}])
+  }
+])
 
-.controller('EducationCtrl',['$scope','education',
-   function ($scope,education){
-     console.log(education);
-     $scope.e = education;
-}])
+.controller('EducationCtrl', ['$scope', 'education',
+  function($scope, education) {
+    console.log(education);
+    $scope.e = education;
+  }
+])
 
-.controller('ProjectsCtrl',['$scope','projects',
-   function ($scope,projects){
-     $scope.projects = projects;
-}])
+.controller('ProjectsCtrl', ['$scope', 'projects',
+  function($scope, projects) {
+    $scope.p = projects;
+  }
+])
+
+.controller('SkillsCtrl', ['$scope', 'skills', 'skillscat',
+  function($scope, skills, skillscat) {
+    console.log(skills);
+    $scope.s = skills;
+    $scope.cat = skillscat;
+  }
+])
+
+.controller('ExperienceCtrl', ['$scope', 'experience', function($scope, experience) {
+  $scope.e = experience;
+}]);
 
 /*
 angular.module('Controllers',[])

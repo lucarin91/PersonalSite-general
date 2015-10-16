@@ -1,0 +1,9 @@
+<div>
+  <div ng-repeat="cat in cat" class="row">
+    <h4 ng-bind="cat.name | langFilter" class="col-sm-12"></h4>
+    <div ng-repeat="i in s | filter:{category:cat.id}" class="col-sm-6">
+      <h5 ng-bind="i.name"></h5>
+      <p ng-bind="i.point"></p>
+    </div>
+  </div>
+</div>
