@@ -1,75 +1,77 @@
-"use strict";
+(function() {
+  "use strict";
 
-angular.module('mysiteController', [])
-  .controller('HomeCtrl', ['$scope', 'me', 'language', 'siteText',
-    function($scope, me, language, siteText) {
+  angular.module('mysiteController', [])
+    .controller('HomeCtrl', ['$scope', 'me', 'language', 'siteText',
+      function($scope, me, language, siteText) {
+        $scope.me = me;
+        $scope.siteText = siteText;
+
+        $scope.test = 'ciao!';
+        $scope.mod = false;
+        /*  $scope.click = function(){
+            console.log('click!');
+            $scope.mod = !$scope.mod;
+            console.log($scope.mod);*/
+        //};
+      }
+    ])
+
+  .controller('MeCtrl', ['$scope', 'me',
+    function($scope, me) {
+      console.log(me);
       $scope.me = me;
-      $scope.siteText = siteText;
-
-      $scope.test = 'ciao!';
-      $scope.mod = false;
-      /*  $scope.click = function(){
-          console.log('click!');
-          $scope.mod = !$scope.mod;
-          console.log($scope.mod);*/
-      //};
     }
   ])
 
-.controller('MeCtrl', ['$scope', 'me',
-  function($scope, me) {
-    console.log(me);
-    $scope.me = me;
-  }
-])
+  .controller('EducationCtrl', ['$scope', 'education',
+    function($scope, education) {
+      console.log(education);
+      $scope.e = education;
+    }
+  ])
 
-.controller('EducationCtrl', ['$scope', 'education',
-  function($scope, education) {
-    console.log(education);
-    $scope.e = education;
-  }
-])
+  .controller('ProjectsCtrl', ['$scope', 'projects',
+    function($scope, projects) {
+      $scope.p = projects;
+    }
+  ])
 
-.controller('ProjectsCtrl', ['$scope', 'projects',
-  function($scope, projects) {
-    $scope.p = projects;
-  }
-])
+  .controller('SkillsCtrl', ['$scope', 'skills', 'skillscat',
+    function($scope, skills, skillscat) {
+      console.log(skills);
+      $scope.s = skills;
+      $scope.cat = skillscat;
+    }
+  ])
 
-.controller('SkillsCtrl', ['$scope', 'skills', 'skillscat',
-  function($scope, skills, skillscat) {
-    console.log(skills);
-    $scope.s = skills;
-    $scope.cat = skillscat;
-  }
-])
+  .controller('ExperienceCtrl', ['$scope', 'experience', function($scope, experience) {
+    $scope.e = experience;
+  }]);
 
-.controller('ExperienceCtrl', ['$scope', 'experience', function($scope, experience) {
-  $scope.e = experience;
-}]);
+  /*
+  angular.module('Controllers',[])
 
-/*
-angular.module('Controllers',[])
+  .controller('HomeCtrl',['$scope','me',
+  function($scope,me){
+    $scope.me=me.data;
+  }])
+  .controller('CurriculumCtrl',['$scope','curriculum','skills',
+  function($scope,curriculum,skills){
+    $scope.curriculum=curriculum.data;
+    $scope.skills=skills.data;
 
-.controller('HomeCtrl',['$scope','me',
-function($scope,me){
-  $scope.me=me.data;
-}])
-.controller('CurriculumCtrl',['$scope','curriculum','skills',
-function($scope,curriculum,skills){
-  $scope.curriculum=curriculum.data;
-  $scope.skills=skills.data;
+    $scope.percentia=function(d){
+      return (100*d)/3 + '%';
+    };
+  }])
+  .controller('ProjectCtrl',['$scope','projects',
+  function($scope,projects){
+    $scope.projects=projects.data;
+  }])
+  .controller('ContactCtrl',['$scope',
+  function($scope){
 
-  $scope.percentia=function(d){
-    return (100*d)/3 + '%';
-  };
-}])
-.controller('ProjectCtrl',['$scope','projects',
-function($scope,projects){
-  $scope.projects=projects.data;
-}])
-.controller('ContactCtrl',['$scope',
-function($scope){
-
-}]);
-*/
+  }]);
+  */
+}());

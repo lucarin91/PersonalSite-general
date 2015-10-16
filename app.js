@@ -1,3 +1,5 @@
+/* jslint node: true */
+"use strict";
 /**
  * Module dependencies
  */
@@ -20,7 +22,9 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -40,35 +44,37 @@ if ('production' == app.get('env')) {
 }
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://'+app.get('mongodb_uri')+'/personal', function(err) {
-    if(err) {
-        console.log('connection error', err);
+mongoose.connect('mongodb://' + app.get('mongodb_uri') + '/personal', function(err) {
+  if (err) {
+    console.log('connection error', err);
 
-    } else {
-        console.log('connection successful');
-        var test = require('./test/testdata.js');
-        test.me();
-        test.education();
-        test.experience();
-        test.projects();
-        test.skills();
-    }
+  } else {
+    console.log('connection successful');
+    var test = require('./test/testdata.js');
+    test.me();
+    test.education();
+    test.experience();
+    test.projects();
+    test.skills();
+  }
 });
 
 /**
  * Routes
  */
- //var index = require('./routes/index');
- //var partials = require('./routes/partials');
- var api = {me: require('./routes/api/me'),
-            //curriculum: require('./routes/api/curriculum'),
-            experience: require('./routes/api/experience'),
-            education: require('./routes/api/education'),
-            projects: require('./routes/api/projects'),
-            projectsCat: require('./routes/api/projects-category'),
-            skills: require('./routes/api/skills'),
-            skillsCat: require('./routes/api/skills-category'),
-            latex: require('./routes/api/latex')};
+//var index = require('./routes/index');
+//var partials = require('./routes/partials');
+var api = {
+  me: require('./routes/api/me'),
+  //curriculum: require('./routes/api/curriculum'),
+  experience: require('./routes/api/experience'),
+  education: require('./routes/api/education'),
+  projects: require('./routes/api/projects'),
+  projectsCat: require('./routes/api/projects-category'),
+  skills: require('./routes/api/skills'),
+  skillsCat: require('./routes/api/skills-category'),
+  latex: require('./routes/api/latex')
+};
 
 // serve index and view partials
 //app.use('/', index);
@@ -94,7 +100,7 @@ app.use('/api/latex', api.latex);
 // redirect all others to the index (HTML5 history)
 //app.use('*', index);
 
-app.use('*', function(req,res,next){
+app.use('*', function(req, res, next) {
   res.sendfile(__dirname + '/public/index.html');
 });
 

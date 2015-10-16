@@ -1,5 +1,8 @@
- var express = require('express');
- var router = express.Router();
+/* jslint node: true */
+"use strict";
+
+var express = require('express');
+var router = express.Router();
 
  /* GET partials */
 router.get('/:name', function (req, res) {
