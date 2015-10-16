@@ -2,24 +2,32 @@
   "use strict";
 
   angular.module('mysiteController', [])
-    .controller('HomeCtrl', ['$scope', 'me', 'language', 'siteText',
-      function($scope, me, language, siteText) {
-        $scope.me = me;
-        $scope.siteText = siteText;
-
-        $scope.test = 'ciao!';
-        $scope.mod = false;
-        /*  $scope.click = function(){
-            console.log('click!');
-            $scope.mod = !$scope.mod;
-            console.log($scope.mod);*/
-        //};
+    .controller('MenuCtrl', ['$scope', '$state', 'languageServ',
+      function($scope, $state, languageServ) {
+        var current = null;
+        $scope.goto = function(route) {
+          if (route === current)
+            route = 'menu';
+          current = route;
+          $state.go(route, {
+            lang: languageServ.get()
+          });
+        };
+        $scope.isActive = function(route) {
+          //console.log($state.is(route));
+          return $state.is(route);
+        };
       }
     ])
 
+  .controller('FooterCtrl', ['$scope', 'languageServ',
+    function($scope, languageServ) {
+      $scope.ln = languageServ;
+    }
+  ])
+
   .controller('MeCtrl', ['$scope', 'me',
     function($scope, me) {
-      console.log(me);
       $scope.me = me;
     }
   ])
@@ -31,15 +39,16 @@
     }
   ])
 
-  .controller('ProjectsCtrl', ['$scope', 'projects',
-    function($scope, projects) {
+  .controller('ProjectsCtrl', ['$scope', 'projects', 'projectscat',
+    function($scope, projects, projectscat) {
+      console.log(projects);
+      $scope.cat = projectscat;
       $scope.p = projects;
     }
   ])
 
   .controller('SkillsCtrl', ['$scope', 'skills', 'skillscat',
     function($scope, skills, skillscat) {
-      console.log(skills);
       $scope.s = skills;
       $scope.cat = skillscat;
     }

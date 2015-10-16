@@ -2,47 +2,58 @@
   'use strict';
 
   var mysiteApp = angular.module('mysiteApp', [
-    //'ngRoute',
+    'ngSanitize',
     'ui.router',
+    'pascalprecht.translate',
     'mysiteController',
     'mysiteService',
     'mysiteDirectives',
     'mySiteFilter'
   ])
 
-  .run(['$rootScope', function($rootScope) {
-      $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        //console.log(toState);
-        //console.log(fromState);
-        //event.preventDefault();
-        // transitionTo() promise will be rejected with
-        // a 'transition prevented' error
-      });
-    }])
-    .controller('menuController', function($scope, $state) {
-      var current = null;
-      $scope.goto = function(route) {
-        if (route === current)
-          route = 'home';
-        current = route;
-        $state.go(route);
-      };
+  .run(['$rootScope', 'languageServ', '$state', function($rootScope, languageServ, $state) {
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+      if (toParams.lang == 'ita' || toParams.lang == 'eng') {
+        languageServ.set(toParams.lang);
+      } else {
+        event.preventDefault();
+        $state.go('menu', {
+          lang: 'ita'
+        });
+      }
+    });
+  }])
 
-      $scope.isActive = function(route) {
-        //console.log($state.is(route));
-        return $state.is(route);
-      };
-    })
+  .config(function($translateProvider) {
+    $translateProvider.translations('eng', {
+      EDU: 'Education',
+      EXP: 'Experience',
+      SKI: 'Skills',
+      PRO: 'Projects',
+      CON: 'Contacts'
+    });
+    $translateProvider.translations('ita', {
+      EDU: 'Educazione',
+      EXP: 'Esperienze',
+      SKI: 'Skills',
+      PRO: 'Progetti',
+      CON: 'Contatti'
+    });
+    $translateProvider.useSanitizeValueStrategy('sanitize');
+    //$translateProvider.preferredLanguage('ita');
+  })
 
   .config(function($stateProvider, $locationProvider) {
     $stateProvider
-      .state('home', {
-        url: ""
+      .state('menu', {
+        url: "/{lang}",
+        templateUrl: "html/menu.html",
+        controller: 'MenuCtrl'
       })
-      .state('me', {
+      .state('menu.me', {
         url: "/me",
         views: {
-          "view.me": {
+          "viewMe": {
             templateUrl: "html/me.html",
             controller: 'MeCtrl',
             resolve: {
@@ -54,10 +65,10 @@
           }
         }
       })
-      .state('education', {
+      .state('menu.education', {
         url: "/education",
         views: {
-          "view.education": {
+          "viewEducation": {
             templateUrl: "html/education.html",
             controller: 'EducationCtrl',
             resolve: {
@@ -68,10 +79,10 @@
           }
         }
       })
-      .state('experience', {
+      .state('menu.experience', {
         url: "/experience",
         views: {
-          "view.experience": {
+          "viewExperience": {
             templateUrl: "html/experience.html",
             controller: 'ExperienceCtrl',
             resolve: {
@@ -82,38 +93,45 @@
           }
         }
       })
-      .state('skills', {
+      .state('menu.skills', {
         url: "/skills",
         views: {
-          "view.skills": {
+          "viewSkills": {
             templateUrl: "html/skills.html",
             controller: 'SkillsCtrl',
             resolve: {
               skills: function(APIService) {
-                console.log('skills');
                 return APIService.skill.query();
               },
               skillscat: function(APIService) {
-                console.log('skillscat');
                 return APIService.skillCat.query();
               }
             }
           }
         }
       })
-      .state('projects', {
+      .state('menu.projects', {
         url: "/projects",
         views: {
-          "view.projects": {
-            template: "index.viewA"
+          "viewProjects": {
+            templateUrl: "html/projects.html",
+            controller: 'ProjectsCtrl',
+            resolve: {
+              projects: function(APIService) {
+                return APIService.pro.query();
+              },
+              projectscat: function(APIService) {
+                return APIService.proCat.query();
+              }
+            }
           }
         }
       })
-      .state('contacts', {
+      .state('menu.contacts', {
         url: "/contacts",
         views: {
-          "view.contacts": {
-            template: "index.viewA"
+          "viewContacts": {
+            template: ""
           }
         }
       });

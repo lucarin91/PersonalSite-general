@@ -85,6 +85,15 @@ body{
   display: block;
 }
 
+.footer a{
+  color: rgba(255, 255, 255, 0.48);
+}
+
+.footer a.active{
+  color: white;
+  text-decoration: none;
+}
+
 .test{
   height: 400px;
 }
