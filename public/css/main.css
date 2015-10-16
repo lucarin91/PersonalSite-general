@@ -85,14 +85,6 @@ body{
   display: block;
 }
 
-.language a{
-  color: rgba(255, 255, 255, 0.48);
-}
-.language a.active{
-  color: white;
-  text-decoration: none;
-}
-
 .test{
   height: 400px;
 }

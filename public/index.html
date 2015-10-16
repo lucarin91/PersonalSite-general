@@ -3,29 +3,16 @@
 <head>
   <base href="/" />
   <title>Luca Rinaldi</title>
-
-  <link rel="stylesheet" href="js/lib/font-awesome.min.css" />
-  <link rel="stylesheet" href="js/lib/bootstrap.min.css" />
-  <script src="js/lib/jquery.min.js"></script>
-  <script src="js/lib/bootstrap.min.js"></script>
-  <script src="js/lib/angular.min.js"></script>
-  <script src="js/lib/angular-resource.min.js"></script>
-  <script src="js/lib/angular-ui-router.min.js"></script>
-  <script src="js/lib/angular-sanitize.min.js"></script>
-  <script src="js/lib/angular-translate.min.js"></script>
-
-
-  <!--
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-route.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-resource.js"></script>
+  <!-- UI-Router -->
   <script src="//angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
+
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-  -->
-
-
   <link rel="stylesheet" href="/css/main.css" />
   <script src="js/app.js"></script>
   <script src="js/service.js"></script>
@@ -51,56 +38,43 @@
   <div class="container main" ng-controller="menuController">
     <div class="row">
       <div class="col-sm-12 menu-row menu-row-cegithubnter menu-row-1" ng-class="{'menu-row-active': isActive('me')}">
-        <div class="menu-title menu-title-center">
-          <a href="" ng-click="goto('me')">Luca Rinaldi</a>
-        </div>
+        <div class="menu-title menu-title-center"><a href="" ng-click="goto('me')">Luca Rinaldi</a></div>
         <div ui-view="view.me"></div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12 menu-row menu-row-right menu-row-2" ng-class="{'menu-row-active': isActive('education')}">
-        <div class="menu-title menu-title-right">
-          <a href="" ng-click="goto('education')" ng-bind="'EDU' | translate"></a>
-        </div>
+        <div class="menu-title menu-title-right"><a href="" ng-click="goto('education')">Education</a></div>
         <div ui-view="view.education"></div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12 menu-row menu-row-left menu-row-3" ng-class="{'menu-row-active': isActive('experience')}">
-        <div class="menu-title menu-title-left">
-          <a href="" ng-click="goto('experience')" ng-bind="'EXP' | translate"></a>
-        </div>
+        <div class="menu-title menu-title-left"><a href="" ng-click="goto('experience')">Experience</a></div>
         <div ui-view="view.experience"></div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12 menu-row menu-row-right menu-row-4" ng-class="{'menu-row-active': isActive('skills')}">
-        <div class="menu-title menu-title-right">
-          <a href="" ng-click="goto('skills')" ng-bind="'SKILL' | translate"></a>
-        </div>
+        <div class="menu-title menu-title-right"><a href="" ng-click="goto('skills')">Skills</a></div>
         <div ui-view="view.skills"></div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12 menu-row menu-row-left menu-row-5" ng-class="{'menu-row-active': isActive('projects')}">
-        <div class="menu-title menu-title-left">
-          <a href="" ng-click="goto('projects')" ng-bind="'PROJECT' | translate"></a>
-        </div>
+        <div class="menu-title menu-title-left"><a href="" ng-click="goto('projects')">Projects</a></div>
         <div ui-view="view.projects"></div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-12 menu-row menu-row-right menu-row-6" ng-class="{'menu-row-active': isActive('contacts')}">
-        <div class="menu-title menu-title-right">
-          <a href="" ng-click="goto('contacts')" ng-bind="'CONTACT' | translate"></a></div>
+        <div class="menu-title menu-title-right"><a href="" ng-click="goto('contacts')">Contacts</a></div>
         <div ui-view="view.contacts"></div>
       </div>
     </div>
-    <div ng-controller="FooterCtrl" class="row footer">
+    <div class="row footer">
       <div class="col-sm-12">
-        <div class="language">
-          <a href="" ng-click="lg.setIta()" ng-class="{ active: lg.get()=='it' }">ITA</a> | <a href="" ng-click="lg.setEng()" ng-class="{ active: lg.get()=='en' }">ENG</a>
-        </div>
+        <div class="language"> ITA|ENG </div>
         <img src="img/firma-cristina.png"></img>
       </div>
     </div>

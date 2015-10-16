@@ -21,18 +21,12 @@
       return [
         [pad(start.getDate()), pad(start.getMonth() + 1), start.getFullYear()].join('/'), [pad(end.getDate()), pad(end.getMonth() + 1), end.getFullYear()].join('/')
       ].join(' - ');
-    };
+    }
   })
 
   .filter('langFilter', ['languageServ', function(languageServ) {
     return function(item) {
-      if (item) {
-        var lang = languageServ.get();
-        if (lang == 'en')
-          return item.eng;
-        if (lang == 'it')
-          return item.ita;
-      }
+      return item[languageServ.get()];
     };
   }]);
 }());

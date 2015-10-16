@@ -1,12 +1,9 @@
 <div>
-  <div ng-repeat="c in cat" class="row">
-    <h4 ng-bind="c.name | langFilter" class="col-sm-12"></h4>
-    <div ng-repeat="i in p | filter:{category:c.id}" class="col-sm-12">
-      <a href="{{ i.link }}">
-        <h5 ng-bind="i.name | langFilter"></h5>
-      </a>
-      <div ng-bind="i.date | formatDate"></div>
-      <p ng-bind="i.info | langFilter"></p>
+  <div ng-repeat="cat in projects" class="row">
+    <h4 ng-bind="cat.name" class="col-sm-12"></h4>
+    <div ng-repeat="p in cat.items" class="col-sm-6"><a href="{{ p.link }}">
+        <h5 ng-bind="p.name"></h5></a>
+      <p ng-bind="p.info"></p>
     </div>
   </div>
 </div>

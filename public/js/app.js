@@ -4,61 +4,28 @@
   var mysiteApp = angular.module('mysiteApp', [
     //'ngRoute',
     'ui.router',
-    'ngSanitize',
-    'pascalprecht.translate',
     'mysiteController',
     'mysiteService',
     'mysiteDirectives',
     'mySiteFilter'
   ])
 
-  .run(['$rootScope', '$stateParams', 'languageServ', '$state',
-      function($rootScope, $stateParams, languageServ, $state) {
-        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-          //console.log(toState);
-          //console.log(fromState);
-          //event.preventDefault();
-          // transitionTo() promise will be rejected with
-          // a 'transition prevented' error
-          console.log('changeStart');
-          console.log(toParams);
-          if (toParams.lang == 'it') {
-            languageServ.setIta();
-          } else if (toParams.lang == 'en') {
-            languageServ.setEng();
-          } else {
-            console.log('redirect');
-            $state.go('home', {
-              lang: 'it'
-            });
-          }
-
-
-        });
-        $rootScope.$on('$stateChangeSuccess', function(event, toState) {
-          console.log('changed');
-          /*if ($stateParams.lang !== undefined) {
-            var otherLang = $stateParams.lang === 'da' ? 'en' : 'da';
-            $rootScope.activeLang = $stateParams.lang;
-            $rootScope.otherLangURL = $location.absUrl().replace('/' + $stateParams.lang, '/' + otherLang);
-            $translate.use($stateParams.lang);
-          }*/
-        });
-        $rootScope.$on('$stateChangeError', function(error) {
-          console.log(error);
-        });
-      }
-    ])
-    .controller('menuController', function($scope, $state, languageServ) {
+  .run(['$rootScope', function($rootScope) {
+      $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+        //console.log(toState);
+        //console.log(fromState);
+        //event.preventDefault();
+        // transitionTo() promise will be rejected with
+        // a 'transition prevented' error
+      });
+    }])
+    .controller('menuController', function($scope, $state) {
       var current = null;
       $scope.goto = function(route) {
-        console.log(languageServ.get());
         if (route === current)
           route = 'home';
         current = route;
-        $state.go(route, {
-          lang: languageServ.get()
-        });
+        $state.go(route);
       };
 
       $scope.isActive = function(route) {
@@ -67,21 +34,15 @@
       };
     })
 
-  .config(function($stateProvider, $locationProvider, $urlRouterProvider) {
-    $urlRouterProvider.when('/', '/it');
+  .config(function($stateProvider, $locationProvider) {
     $stateProvider
-    /*.state('app', {
-      abstract: true,
-      url: '/{lang:(?:it|en)}',
-      template: "<ui-view/>"
-    })*/
       .state('home', {
-        url: "/{lang:(?:it|en)}"
+        url: ""
       })
       .state('me', {
-        url: "/{lang:(?:it|en)}/me",
+        url: "/me",
         views: {
-          "view.me@": {
+          "view.me": {
             templateUrl: "html/me.html",
             controller: 'MeCtrl',
             resolve: {
@@ -94,7 +55,7 @@
         }
       })
       .state('education', {
-        url: "/{lang:(?:it|en)}/education",
+        url: "/education",
         views: {
           "view.education": {
             templateUrl: "html/education.html",
@@ -108,7 +69,7 @@
         }
       })
       .state('experience', {
-        url: "/{lang:(?:it|en)}/experience",
+        url: "/experience",
         views: {
           "view.experience": {
             templateUrl: "html/experience.html",
@@ -122,7 +83,7 @@
         }
       })
       .state('skills', {
-        url: "/{lang:(?:it|en)}/skills",
+        url: "/skills",
         views: {
           "view.skills": {
             templateUrl: "html/skills.html",
@@ -141,53 +102,23 @@
         }
       })
       .state('projects', {
-        url: "/{lang:(?:it|en)}/projects",
+        url: "/projects",
         views: {
           "view.projects": {
-            templateUrl: "html/projects.html",
-            controller: 'ProjectsCtrl',
-            resolve: {
-              projects: function(APIService) {
-                return APIService.pro.query();
-              },
-              projectscat: function(APIService) {
-                return APIService.proCat.query();
-              }
-            }
+            template: "index.viewA"
           }
         }
       })
       .state('contacts', {
-        url: "/{lang:(?:it|en)}/contacts",
+        url: "/contacts",
         views: {
           "view.contacts": {
-            template: ""
+            template: "index.viewA"
           }
         }
       });
     $locationProvider.html5Mode(true);
-  })
-
-  .config(['$translateProvider', function($translateProvider) {
-    $translateProvider.translations('en', {
-      'EDU': 'Education',
-      'EXP': 'Experience',
-      'SKILL': 'Skills',
-      'PROJECT': 'Projects',
-      'CONTACT': 'Contacts'
-    });
-
-    $translateProvider.translations('it', {
-      'EDU': 'Educazione',
-      'EXP': 'Esperienze',
-      'SKILL': 'Skills',
-      'PROJECT': 'Progetti',
-      'CONTACT': 'Contatti'
-    });
-
-    $translateProvider.preferredLanguage('it');
-    $translateProvider.useSanitizeValueStrategy('sanitize');
-  }]);
+  });
   /*
   mysiteApp.run( function($rootScope, $location, language) {
       // register listener to watch route changes
