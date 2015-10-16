@@ -49,14 +49,14 @@ mongoose.connect('mongodb://' + app.get('mongodb_uri') + '/personal', function(e
     console.log('connection error', err);
   } else {
     console.log('connection successful');
-    if ('development' == app.get('env')) {
+  //  if ('development' == app.get('env')) {
       var test = require('./test/testdata.js');
       test.me();
       test.education();
       test.experience();
       test.projects();
       test.skills();
-    }
+  //  }
   }
 });
 
