@@ -17,7 +17,7 @@
         //event.preventDefault();
         // transitionTo() promise will be rejected with
         // a 'transition prevented' error
-      })
+      });
     }])
     .controller('menuController', function($scope, $state) {
       var current = null;
@@ -31,7 +31,7 @@
       $scope.isActive = function(route) {
         //console.log($state.is(route));
         return $state.is(route);
-      }
+      };
     })
 
   .config(function($stateProvider, $locationProvider) {
@@ -116,7 +116,7 @@
             template: "index.viewA"
           }
         }
-      })
+      });
     $locationProvider.html5Mode(true);
   });
   /*
