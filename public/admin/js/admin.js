@@ -1,7 +1,6 @@
 // declare a new module called 'myApp', and make it require the `ng-admin` module as a dependency
 var myApp = angular.module('myApp', [
-  'ng-admin',
-  'EducationEntity'
+  'ng-admin'
 ]);
 // declare a function to run when the module bootstraps (during the 'config' phase)
 myApp.config(['NgAdminConfigurationProvider', function (nga) {
@@ -88,7 +87,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
 
     var projects = nga.entity('projects');
     projects.listView().fields([
-      nga.field('name.'+lang).isDetailLink(true),
+      nga.field('name').isDetailLink(true),
       nga.field('category','reference')
         .label('Category')
         .targetEntity(projectscat)
@@ -98,8 +97,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     ]);
     // add the user entity to the admin application
     projects.creationView().fields([
-      nga.field('name.ita'),
-      nga.field('name.eng'),
+      nga.field('name'),
       nga.field('info.ita','text'),
       nga.field('info.eng','text'),
       nga.field('link'),
@@ -127,7 +125,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
 
     var skills = nga.entity('skills');
     skills.listView().fields([
-      nga.field('name').isDetailLink(true),
+      nga.field('name.'+lang).isDetailLink(true),
       nga.field('category','reference')
         .label('Category')
         .targetEntity(skillscat)
@@ -136,7 +134,8 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     ]);
     // add the user entity to the admin application
     skills.creationView().fields([
-      nga.field('name'),
+      nga.field('name.ita'),
+      nga.field('name.eng'),
       nga.field('point','number'),
       nga.field('category','reference')
         .label('Category')

@@ -88,10 +88,7 @@ var test={
       }}, function(err,dataAll){
           for (var j=0; j<3;j++){
             Projects.item.create({
-                  name: {
-                    eng: loremIpsum({count: 2, units: loremPar[0]}),
-                    ita: loremIpsum({count: 2, units: loremPar[0]})
-                  },
+                  name: loremIpsum({count: 2, units: loremPar[0]}),
                   info: {
                     eng: loremIpsum({count: 2, units: loremPar[1]}),
                     ita: loremIpsum({count: 2, units: loremPar[1]})
@@ -117,7 +114,10 @@ var test={
         }},function(err,dataAll){
             for (var j=0; j<8;j++){
               Skills.item.create({
-                    name: loremIpsum({count: 1, units: loremPar[0]}),
+                    name: {
+                      eng: loremIpsum({count: 1, units: loremPar[0]}),
+                      ita: loremIpsum({count: 1, units: loremPar[0]})
+                    },
                     point: randomInt(1,3),
                     category: dataAll._id
                 },function(err,dataItems){

@@ -3,7 +3,7 @@
     <h4 ng-bind="c.name | langFilter" class="col-sm-12"></h4>
     <div ng-repeat="i in p | filter:{category:c.id}" class="col-sm-12">
       <a href="{{ i.link }}">
-        <h5 ng-bind="i.name | langFilter"></h5>
+        <h5 ng-bind="i.name"></h5>
       </a>
       <div ng-bind="i.date | formatDate"></div>
       <p ng-bind="i.info | langFilter"></p>
