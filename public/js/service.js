@@ -4,19 +4,24 @@
   /* Services */
   angular.module('mysiteService', ['ngResource'])
     //for the language of the site
-    .factory('languageServ', [function() {
-      var language = 'ita';
+    .factory('languageServ', ['$translate', function($translate) {
+      var language = 'it';
+      var updateUI = function(){
+        $translate.use(language);
+      };
       return {
         setIta: function() {
-          language = 'ita';
+          language = 'it';
+          updateUI();
         },
         setEng: function() {
-          language = 'eng';
+          language = 'en';
+          updateUI();
         },
-        get: function(property) {
+        get: function() {
           return language;
         }
-      }
+      };
     }])
 
   .factory('APIService', ['$resource',
@@ -29,7 +34,7 @@
           skillCat: $resource('/api/skillscat'),
           pro: $resource('/api/projects'),
           proCat: $resource('/api/projectscat')
-        }
+        };
       }
     ])
     /*
@@ -74,7 +79,7 @@
               url: path
             });
           }
-        }
+        };
       }
     ]);
 }());

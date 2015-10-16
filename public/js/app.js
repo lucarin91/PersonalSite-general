@@ -4,28 +4,61 @@
   var mysiteApp = angular.module('mysiteApp', [
     //'ngRoute',
     'ui.router',
+    'ngSanitize',
+    'pascalprecht.translate',
     'mysiteController',
     'mysiteService',
     'mysiteDirectives',
     'mySiteFilter'
   ])
 
-  .run(['$rootScope', function($rootScope) {
-      $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        //console.log(toState);
-        //console.log(fromState);
-        //event.preventDefault();
-        // transitionTo() promise will be rejected with
-        // a 'transition prevented' error
-      });
-    }])
-    .controller('menuController', function($scope, $state) {
+  .run(['$rootScope', '$stateParams', 'languageServ', '$state',
+      function($rootScope, $stateParams, languageServ, $state) {
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+          //console.log(toState);
+          //console.log(fromState);
+          //event.preventDefault();
+          // transitionTo() promise will be rejected with
+          // a 'transition prevented' error
+          console.log('changeStart');
+          console.log(toParams);
+          if (toParams.lang == 'it') {
+            languageServ.setIta();
+          } else if (toParams.lang == 'en') {
+            languageServ.setEng();
+          } else {
+            console.log('redirect');
+            $state.go('home', {
+              lang: 'it'
+            });
+          }
+
+
+        });
+        $rootScope.$on('$stateChangeSuccess', function(event, toState) {
+          console.log('changed');
+          /*if ($stateParams.lang !== undefined) {
+            var otherLang = $stateParams.lang === 'da' ? 'en' : 'da';
+            $rootScope.activeLang = $stateParams.lang;
+            $rootScope.otherLangURL = $location.absUrl().replace('/' + $stateParams.lang, '/' + otherLang);
+            $translate.use($stateParams.lang);
+          }*/
+        });
+        $rootScope.$on('$stateChangeError', function(error) {
+          console.log(error);
+        });
+      }
+    ])
+    .controller('menuController', function($scope, $state, languageServ) {
       var current = null;
       $scope.goto = function(route) {
+        console.log(languageServ.get());
         if (route === current)
           route = 'home';
         current = route;
-        $state.go(route);
+        $state.go(route, {
+          lang: languageServ.get()
+        });
       };
 
       $scope.isActive = function(route) {
@@ -34,15 +67,21 @@
       };
     })
 
-  .config(function($stateProvider, $locationProvider) {
+  .config(function($stateProvider, $locationProvider, $urlRouterProvider) {
+    $urlRouterProvider.when('/', '/it');
     $stateProvider
+    /*.state('app', {
+      abstract: true,
+      url: '/{lang:(?:it|en)}',
+      template: "<ui-view/>"
+    })*/
       .state('home', {
-        url: ""
+        url: "/{lang:(?:it|en)}"
       })
       .state('me', {
-        url: "/me",
+        url: "/{lang:(?:it|en)}/me",
         views: {
-          "view.me": {
+          "view.me@": {
             templateUrl: "html/me.html",
             controller: 'MeCtrl',
             resolve: {
@@ -55,7 +94,7 @@
         }
       })
       .state('education', {
-        url: "/education",
+        url: "/{lang:(?:it|en)}/education",
         views: {
           "view.education": {
             templateUrl: "html/education.html",
@@ -69,7 +108,7 @@
         }
       })
       .state('experience', {
-        url: "/experience",
+        url: "/{lang:(?:it|en)}/experience",
         views: {
           "view.experience": {
             templateUrl: "html/experience.html",
@@ -83,7 +122,7 @@
         }
       })
       .state('skills', {
-        url: "/skills",
+        url: "/{lang:(?:it|en)}/skills",
         views: {
           "view.skills": {
             templateUrl: "html/skills.html",
@@ -102,23 +141,53 @@
         }
       })
       .state('projects', {
-        url: "/projects",
+        url: "/{lang:(?:it|en)}/projects",
         views: {
           "view.projects": {
-            template: "index.viewA"
+            templateUrl: "html/projects.html",
+            controller: 'ProjectsCtrl',
+            resolve: {
+              projects: function(APIService) {
+                return APIService.pro.query();
+              },
+              projectscat: function(APIService) {
+                return APIService.proCat.query();
+              }
+            }
           }
         }
       })
       .state('contacts', {
-        url: "/contacts",
+        url: "/{lang:(?:it|en)}/contacts",
         views: {
           "view.contacts": {
-            template: "index.viewA"
+            template: ""
           }
         }
       });
     $locationProvider.html5Mode(true);
-  });
+  })
+
+  .config(['$translateProvider', function($translateProvider) {
+    $translateProvider.translations('en', {
+      'EDU': 'Education',
+      'EXP': 'Experience',
+      'SKILL': 'Skills',
+      'PROJECT': 'Projects',
+      'CONTACT': 'Contacts'
+    });
+
+    $translateProvider.translations('it', {
+      'EDU': 'Educazione',
+      'EXP': 'Esperienze',
+      'SKILL': 'Skills',
+      'PROJECT': 'Progetti',
+      'CONTACT': 'Contatti'
+    });
+
+    $translateProvider.preferredLanguage('it');
+    $translateProvider.useSanitizeValueStrategy('sanitize');
+  }]);
   /*
   mysiteApp.run( function($rootScope, $location, language) {
       // register listener to watch route changes

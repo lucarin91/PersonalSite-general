@@ -26,20 +26,19 @@
 
   .controller('EducationCtrl', ['$scope', 'education',
     function($scope, education) {
-      console.log(education);
       $scope.e = education;
     }
   ])
 
-  .controller('ProjectsCtrl', ['$scope', 'projects',
-    function($scope, projects) {
+  .controller('ProjectsCtrl', ['$scope', 'projects', 'projectscat',
+    function($scope, projects, projectscat) {
       $scope.p = projects;
+      $scope.cat = projectscat;
     }
   ])
 
   .controller('SkillsCtrl', ['$scope', 'skills', 'skillscat',
     function($scope, skills, skillscat) {
-      console.log(skills);
       $scope.s = skills;
       $scope.cat = skillscat;
     }
@@ -47,8 +46,13 @@
 
   .controller('ExperienceCtrl', ['$scope', 'experience', function($scope, experience) {
     $scope.e = experience;
-  }]);
+  }])
 
+  .controller('FooterCtrl', ['$scope', 'languageServ',
+    function($scope, languageServ) {
+      $scope.lg = languageServ;
+    }
+  ]);
   /*
   angular.module('Controllers',[])
 
