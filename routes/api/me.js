@@ -9,7 +9,11 @@ var Me = require('../../models/Me.js');
 
 /* GET /me listing. */
 router.get('/', function(req, res, next) {
-  Me.findOne({}, function (err, todos) {
+  Me.findOne({}).select({
+    email: 0,
+    address: 0,
+    telephone: 0
+  }).exec(function(err, todos) {
     if (err) return next(err);
     res.json(todos);
   });
@@ -21,8 +25,8 @@ router.put('/', /*authController.isAuthenticated,*/ function(req, res, next) {
   /*var query = req.lang=='ita' ? {$set: {"bio.ita": req.body.bio}}:
                                 {$set: {"bio.eng": req.body.bio}};
   if (req.body.img) query.$set.img = req.body.img;*/
-  Me.update({}, req.body, function (err, post) {
-    if (err)return next(err);
+  Me.update({}, req.body, function(err, post) {
+    if (err) return next(err);
     res.json(post);
   });
 });

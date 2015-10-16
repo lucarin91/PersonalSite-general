@@ -21,9 +21,9 @@ var test={
     var Me = require('../models/Me.js');
     Me.remove({}).exec();
     Me.create({
-      name: 'Mario',
-      surname: 'Rossi',
-      email: 'mario.rossi@gmail.com',
+      name: 'Luca',
+      surname: 'Rinaldi',
+      email: 'lucarin91@gmail.com',
       telephone: '+39455 4567888',
       address: loremIpsum({count: 4, units: loremPar[0]}),
       bio:  {

@@ -47,15 +47,16 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://' + app.get('mongodb_uri') + '/personal', function(err) {
   if (err) {
     console.log('connection error', err);
-
   } else {
     console.log('connection successful');
-    var test = require('./test/testdata.js');
-    test.me();
-    test.education();
-    test.experience();
-    test.projects();
-    test.skills();
+    if ('development' == app.get('env')) {
+      var test = require('./test/testdata.js');
+      test.me();
+      test.education();
+      test.experience();
+      test.projects();
+      test.skills();
+    }
   }
 });
 
