@@ -11,7 +11,8 @@ a:hover {
   text-decoration: underline;
 }
 .main {
-  width: 700px;
+  max-width: 700px;
+  min-width: 440px;
   margin-top: 30px;
 }
 .main-content {
