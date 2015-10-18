@@ -1,13 +1,18 @@
 <container-fluid>
-  <div class="row">
+  <div class="row" ng-repeat="i in e">
     <div class="col-md-12">
-      <div ng-repeat="i in e">
-        <a href="{{i.link}}"><h3 ng-bind="i.company"></h3></a>
-        <h4 ng-bind="i.role | langFilter"></h3>
-        <span ng-bind="i.location"></span>
-        <div ng-bind="i.date | formatDate"></div>
-        <div ng-bind="i.info | langFilter"></div>
+      <div class="content-title">
+        <a href="{{i.link}}">
+          <span class="content-title" ng-bind="i.company"></span>
+        </a>
+        <span class="content-subtitle">~</span>
+        <span class="content-subtitle" ng-bind="i.role | langFilter"></span>
       </div>
+      <div class="content-location">
+        <span ng-bind="i.location"></span> |
+        <span ng-bind="i.date | formatDate"></span>
+      </div>
+      <div class="content-text" ng-bind="i.info | langFilter"></div>
     </div>
   </div>
 </container-fluid>

@@ -33,9 +33,9 @@
       CON: 'Contacts'
     });
     $translateProvider.translations('ita', {
-      EDU: 'Educazione',
-      EXP: 'Esperienze',
-      SKI: 'Skills',
+      EDU: 'Formazione',
+      EXP: 'Esperienza',
+      SKI: 'Competenze',
       PRO: 'Progetti',
       CON: 'Contatti'
     });

@@ -9,10 +9,12 @@
   </div>
   <div class="row">
     <div class="col-sm-12 menu-row menu-row-right menu-row-2" ng-class="{'menu-row-active': isActive('menu.education')}">
+      <!-- <div class="menu-row-back" ng-class="{'menu-row-back-active': isActive('menu.education')}"> -->
       <div class="menu-title menu-title-right">
         <a href="" ng-click="goto('menu.education')" ng-bind="'EDU' | translate"></a>
       </div>
       <div ui-view="viewEducation"></div>
+      <!-- </div> -->
     </div>
   </div>
   <div class="row">

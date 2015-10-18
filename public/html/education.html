@@ -1,13 +1,13 @@
 <container-fluid>
-  <div class="row">
+  <div class="row" ng-repeat="i in e">
     <div class="col-md-12">
-      <div ng-repeat="i in e">
-        <h3 ng-bind="i.school | langFilter"></h3>
-        <h4 ng-bind="i.degree | langFilter"></h3>
+      <div class="content-title" ng-bind="i.school | langFilter"></div>
+      <div class="content-subtitle" ng-bind="i.degree | langFilter"></div>
+      <div class="content-location">
+        <span ng-bind="i.date | formatDate"></span> |
         <span ng-bind="i.location"></span>
-        <div ng-bind="i.score | langFilter"></div>
-        <div ng-bind="i.date | formatDate"></div>
       </div>
+      <div class="content-location" ng-bind="i.score | langFilter"></div>
     </div>
   </div>
 </container-fluid>

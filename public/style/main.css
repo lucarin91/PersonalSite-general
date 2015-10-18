@@ -7,127 +7,37 @@ body {
 a:focus {
   text-decoration: none;
 }
-a:hover{
+a:hover {
   text-decoration: underline;
 }
 .main {
   width: 700px;
   margin-top: 30px;
 }
-.menu-row {
-  height: 100px;
-  border: 35px solid;
-  padding: 10px;
-  color: white;
-}
-.menu-row-1 {
-  -webkit-border-image: url(img/border-start.png) 40 40 stretch;
-  /* Safari 3.1-5 */
-  -o-border-image: url(img/border-start.png) 40 40 stretch;
-  /* Opera 11-12.1 */
-  border-image: url(/img/border-start.png) 40 40 stretch;
-  height: 130px;
-  padding: 0px;
-}
-.menu-row-1 .menu-title a {
-  font-size: 40px;
-}
-.menu-row-2 {
-  -webkit-border-image: url(img/border1.png) 40 40 stretch;
-  /* Safari 3.1-5 */
-  -o-border-image: url(img/border1.png) 40 40 stretch;
-  /* Opera 11-12.1 */
-  border-image: url(/img/border1.png) 40 40 stretch;
-  border-top: 0px;
-}
-.menu-row-3 {
-  -webkit-border-image: url(img/border2.png) 40 40 stretch;
-  /* Safari 3.1-5 */
-  -o-border-image: url(img/border2.png) 40 40 stretch;
-  /* Opera 11-12.1 */
-  border-image: url(/img/border2.png) 40 40 stretch;
-  border-top: 0px;
-}
-.menu-row-4 {
-  -webkit-border-image: url(img/border1.png) 40 40 stretch;
-  /* Safari 3.1-5 */
-  -o-border-image: url(img/border1.png) 40 40 stretch;
-  /* Opera 11-12.1 */
-  border-image: url(/img/border1.png) 40 40 stretch;
-  border-top: 0px;
-}
-.menu-row-5 {
-  -webkit-border-image: url(img/border2.png) 40 40 stretch;
-  /* Safari 3.1-5 */
-  -o-border-image: url(img/border2.png) 40 40 stretch;
-  /* Opera 11-12.1 */
-  border-image: url(/img/border2.png) 40 40 stretch;
-  border-top: 0px;
-}
-.menu-row-6 {
-  -webkit-border-image: url(img/border-end.png) 40 40 stretch;
-  /* Safari 3.1-5 */
-  -o-border-image: url(img/border-end.png) 40 40 stretch;
-  /* Opera 11-12.1 */
-  border-image: url(/img/border-end.png) 40 40 stretch;
-  height: 90px;
-  border-top: 0px;
-}
-.menu-row-left {
-  text-align: left;
-}
-.menu-row-right {
-  text-align: right;
-}
-.menu-row-active {
-  height: auto;
-  min-height: 100px;
-}
-.menu-row-active .menu-title a {
-  color: white;
-  text-decoration: underline;
-}
-.menu-title a {
-  font-size: 30px;
-  text-transform: uppercase;
-  letter-spacing: 10px;
-  color: #939a95;
-}
-.menu-title-center {
-  text-align: center;
-}
-.menu-title-left {
-  text-align: left;
-}
-.menu-title-right {
-  text-align: right;
-}
-.footer {
-  display: block;
-  margin: 30px auto;
-  padding: 5px;
-  text-align: center;
-}
-.footer img {
-  margin: 5px auto;
-  display: block;
-}
-.footer a {
-  color: rgba(255, 255, 255, 0.48);
-}
-.footer a.active {
-  color: white;
-  text-decoration: none;
-}
-.test {
-  height: 400px;
-}
 .main-content {
   margin: 20px 0;
 }
-.curriculum-skills {
-  margin: 10px 10px;
+.content-title, .content-title-smoll{
+  margin-top: 20px;
+  font-size: 25px;
+  text-transform: uppercase;
+  margin-bottom: -3px;
 }
-.curriculum-points {
-  height: 10px;
+
+.content-title-smoll{
+  font-size: 22px;
+}
+.content-subtitle {
+  font-size: 17px;
+  text-transform: uppercase;
+}
+.content-location {
+  font-variant: small-caps;
+}
+.content-text {
+  margin-top: 2px;
+}
+.skill-point {
+  width: 100px;
+  margin-right: -8px;
 }

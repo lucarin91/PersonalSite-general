@@ -1,9 +1,11 @@
-<div>
-  <div ng-repeat="cat in cat" class="row">
-    <h4 ng-bind="cat.name | langFilter" class="col-sm-12"></h4>
-    <div ng-repeat="i in s | filter:{category:cat.id}" class="col-sm-12">
-      <h5 ng-bind="i.name | langFilter"></h5>
-      <p ng-bind="i.point"></p>
+<container-fluid>
+  <div ng-repeat="c in cat" class="row">
+    <div class="col-sm-12">
+      <div class="content-title" ng-bind="c.name | langFilter"></div>
+      <div class="col-sm-4" ng-repeat="i in s | filter:{category:c.id}">
+        <div class="content-title-smoll" ng-bind="i.name | langFilter"></div>
+        <skillbar point="{{ i.point }}"></skillbar>
+      </div>
     </div>
   </div>
-</div>
+</container-fluid>
