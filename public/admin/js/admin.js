@@ -5,7 +5,7 @@ var myApp = angular.module('myApp', [
 // declare a function to run when the module bootstraps (during the 'config' phase)
 myApp.config(['NgAdminConfigurationProvider', function (nga) {
     // create an admin application
-    var admin = nga.application('My First Admin')
+    var admin = nga.application('PersonalSite Admin')
                 .baseApiUrl('/api/');
     var lang = 'ita';
 

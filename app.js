@@ -4,12 +4,12 @@
  * Module dependencies
  */
 var express = require('express'),
-  bodyParser = require('body-parser'),
-  methodOverride = require('method-override'),
-  errorhandler = require('errorhandler'),
-  morgan = require('morgan'),
-  http = require('http'),
-  path = require('path');
+    bodyParser = require('body-parser'),
+    methodOverride = require('method-override'),
+    errorhandler = require('errorhandler'),
+    morgan = require('morgan'),
+    http = require('http'),
+    path = require('path');
 
 var app = module.exports = express();
 
@@ -23,7 +23,7 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
-  extended: true
+    extended: true
 }));
 app.use(bodyParser.json());
 app.use(methodOverride());
@@ -33,31 +33,31 @@ var env = process.env.NODE_ENV || 'development';
 
 // development only
 if ('development' == app.get('env')) {
-  console.log("development");
-  app.set('mongodb_uri', 'mongo');
+    console.log("development");
+    app.set('mongodb_uri', 'mongo');
 }
 
 // production only
 if ('production' == app.get('env')) {
-  console.log("production");
-  app.set('mongodb_uri', 'localhost');
+    console.log("production");
+    app.set('mongodb_uri', 'localhost');
 }
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://' + app.get('mongodb_uri') + '/personal', function(err) {
-  if (err) {
-    console.log('connection error', err);
-  } else {
-    console.log('connection successful');
-  //  if ('development' == app.get('env')) {
-      var test = require('./test/testdata.js');
-      test.me();
-      test.education();
-      test.experience();
-      test.projects();
-      test.skills();
-  //  }
-  }
+    if (err) {
+        console.log('connection error', err);
+    } else {
+        console.log('connection successful');
+        if ('development' == app.get('env')) {
+            var test = require('./test/testdata.js');
+            test.me();
+            test.education();
+            test.experience();
+            test.projects();
+            test.skills();
+        }
+    }
 });
 
 /**
@@ -66,15 +66,15 @@ mongoose.connect('mongodb://' + app.get('mongodb_uri') + '/personal', function(e
 //var index = require('./routes/index');
 //var partials = require('./routes/partials');
 var api = {
-  me: require('./routes/api/me'),
-  //curriculum: require('./routes/api/curriculum'),
-  experience: require('./routes/api/experience'),
-  education: require('./routes/api/education'),
-  projects: require('./routes/api/projects'),
-  projectsCat: require('./routes/api/projects-category'),
-  skills: require('./routes/api/skills'),
-  skillsCat: require('./routes/api/skills-category'),
-  latex: require('./routes/api/latex')
+    me: require('./routes/api/me'),
+    //curriculum: require('./routes/api/curriculum'),
+    experience: require('./routes/api/experience'),
+    education: require('./routes/api/education'),
+    projects: require('./routes/api/projects'),
+    projectsCat: require('./routes/api/projects-category'),
+    skills: require('./routes/api/skills'),
+    skillsCat: require('./routes/api/skills-category'),
+    latex: require('./routes/api/latex')
 };
 
 // serve index and view partials
@@ -102,7 +102,7 @@ app.use('/api/latex', api.latex);
 //app.use('*', index);
 
 app.use('*', function(req, res, next) {
-  res.sendfile(__dirname + '/public/index.html');
+    res.sendfile(__dirname + '/public/index.html');
 });
 
 /**
@@ -110,41 +110,41 @@ app.use('*', function(req, res, next) {
  */
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 
 // development only
 if (env === 'development') {
-  console.log('error_development');
-  app.use(errorhandler());
-  // development error handler
-  // will print stacktrace
-  /*app.use(function(err, req, res, next) {
-    console.log(err);
-    res.status(err.status = (err.status || 500));
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });*/
+    console.log('error_development');
+    app.use(errorhandler());
+    // development error handler
+    // will print stacktrace
+    /*app.use(function(err, req, res, next) {
+      console.log(err);
+      res.status(err.status = (err.status || 500));
+      res.render('error', {
+        message: err.message,
+        error: err
+      });
+    });*/
 }
 
 // production only
 if (env === 'production') {
-  console.log('error_production');
-  // production error handler
-  // no stacktraces leaked to user
-  app.use(function(err, req, res, next) {
-    console.log(err);
-    res.status(err.status = (err.status || 500));
-    res.render('error', {
-      message: err.message,
-      error: {}
+    console.log('error_production');
+    // production error handler
+    // no stacktraces leaked to user
+    app.use(function(err, req, res, next) {
+        console.log(err);
+        res.status(err.status = (err.status || 500));
+        res.render('error', {
+            message: err.message,
+            error: {}
+        });
     });
-  });
 }
 
 var server = app.listen();
