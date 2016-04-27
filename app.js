@@ -9,7 +9,8 @@ var express = require('express'),
     errorhandler = require('errorhandler'),
     morgan = require('morgan'),
     http = require('http'),
-    path = require('path');
+    path = require('path'),
+    jwt = require('express-jwt');
 
 var app = module.exports = express();
 
@@ -20,6 +21,8 @@ var app = module.exports = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
+app.set('password', process.env.PASSWORD || 'password');
+app.set('private_key', process.env.PRIVATE_KEY || 'asdkj3428isakksjwjwe8d8salkj');
 app.set('view engine', 'jade');
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
@@ -89,6 +92,21 @@ var api = {
     next(new Error('Lingua non riconosciuta!'));
   }
 });*/
+
+
+app.use(jwt({
+    secret: app.get('private_key')
+}).unless({
+    // path: [
+    //     '/api/authenticate',
+    //     //  { url: '/api/me', methods: ['GET']  }
+    // ],
+    method: ['GET'],
+    path: ['/api/authenticate']
+    //custom: function(req,res){return req.method=='GET';}
+}));
+
+app.use('/api/authenticate', require('./routes/authenticate'));
 app.use('/api/me', api.me);
 app.use('/api/experience', api.experience);
 app.use('/api/education', api.education);
