@@ -1,6 +1,6 @@
-angular.module('PSAservice', [])
+angular.module('PSAservice', [ ])
 
-.factory('TokenService', function() {
+.factory('TokenService', function(Restangular) {
     var token = '';
     return {
         is: function (){
@@ -11,6 +11,9 @@ angular.module('PSAservice', [])
         },
         set: function(t){
             token = t;
+            Restangular.setDefaultHeaders({
+                'Authorization': 'Bearer ' + t
+            });
         }
     };
 });

@@ -5,14 +5,20 @@ angular.module('PersonalSiteAdmin', [
     'PSAcontroller'
 ])
 
-.run(['$rootScope', 'TokenService', function($rootScope, TokenService) {
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-        if (!TokenService.is()) {
-            event.preventDefault();
-            $state.go('login');
-        }
-    });
-}])
+.run(['$rootScope', 'TokenService', '$state',
+    function($rootScope, TokenService, $state) {
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+            // console.log(toState);
+            // console.log(fromState);
+
+            if (!TokenService.is() && toState.name != 'login') {
+                console.log('go to login');
+                event.preventDefault();
+                $state.go('login');
+            }
+        });
+    }
+])
 
 
 .config(function($stateProvider, $locationProvider) {
@@ -25,12 +31,12 @@ angular.module('PersonalSiteAdmin', [
 })
 
 // declare a function to run when the module bootstraps (during the 'config' phase)
-.config(['NgAdminConfigurationProvider', 'RestangularProvider', 'TokenService',
-    function(nga, rap, TokenService) {
+.config(['NgAdminConfigurationProvider',
+    function(nga) {
 
-        rap.setDefaultHeaders({
-            'Authorization': 'Bearer ' + TokenService.get()
-        });
+        // rap.setDefaultHeaders({
+        //     'Authorization': 'Bearer ' + TokenService.get()
+        // });
 
         // create an admin application
         var admin = nga.application('PersonalSite Admin')
