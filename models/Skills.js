@@ -9,16 +9,17 @@ var groupSkill = new Schema({
     eng: {type:String},
     ita: {type:String}
   }
-},
+}/*,
   {
     toObject: { virtuals: true },
     toJSON: { virtuals: true }
-  }
+  }*/
 );
-groupSkill.virtual('id')
-.get(function () {
-  return this._id.toHexString();
-});
+
+// groupSkill.virtual('id')
+// .get(function () {
+//   return this._id.toHexString();
+// });
 
 var item = new Schema({
     name: {
@@ -27,16 +28,17 @@ var item = new Schema({
     },
     point: {type:Number, required:true},
     category: { type: Schema.Types.ObjectId, ref: 'Skills' }
-},
+}/*,
   {
     toObject: { virtuals: true },
     toJSON: { virtuals: true }
-  }
+  }*/
 );
-item.virtual('id')
-.get(function () {
-  return this._id.toHexString();
-});
+
+// item.virtual('id')
+// .get(function () {
+//   return this._id.toHexString();
+// });
 
 groupSkill.statics.get = function(cb){
   return this.find({}).populate({path:'items'}).exec(cb);

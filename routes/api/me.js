@@ -25,7 +25,7 @@ router.put('/', /*authController.isAuthenticated,*/ function(req, res, next) {
   /*var query = req.lang=='ita' ? {$set: {"bio.ita": req.body.bio}}:
                                 {$set: {"bio.eng": req.body.bio}};
   if (req.body.img) query.$set.img = req.body.img;*/
-  if (req.body._id) delete req.body._id;
+  //if (req.body._id) delete req.body._id;
   Me.update({}, req.body, function(err, post) {
     if (err) return next(err);
     res.json(post);

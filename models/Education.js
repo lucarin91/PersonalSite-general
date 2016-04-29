@@ -22,17 +22,17 @@ var education = new Schema({
       eng: {type:Number},
       ita: {type:Number}
     }
-  },
-    {
-      toObject: { virtuals: true },
-      toJSON: { virtuals: true }
-    }
+  }//,
+    // {
+    //   toObject: { virtuals: true },
+    //   toJSON: { virtuals: true }
+    // }
 );
 
-education.virtual('id')
-  .get(function () {
-    return this._id.toHexString();
-});
+// education.virtual('id')
+//   .get(function () {
+//     return this._id.toHexString();
+// });
 
 education.statics.get = function(lang,cb){
   /*return this.model('Education').aggregate({

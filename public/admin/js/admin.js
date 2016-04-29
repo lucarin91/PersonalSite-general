@@ -60,7 +60,8 @@ angular.module('PersonalSiteAdmin', [
         });
         admin.addEntity(me);
 
-        var education = nga.entity('education');
+        var education = nga.entity('education')
+            .identifier(nga.field('_id'));
         education.listView().fields([
             nga.field('degree.' + lang).isDetailLink(true),
             nga.field('school.' + lang),
@@ -84,7 +85,8 @@ angular.module('PersonalSiteAdmin', [
         education.editionView().fields(education.creationView().fields());
         admin.addEntity(education);
 
-        var experience = nga.entity('experience');
+        var experience = nga.entity('experience')
+            .identifier(nga.field('_id'));
         experience.listView().fields([
             nga.field('company').isDetailLink(true),
             nga.field('location'),
@@ -108,7 +110,8 @@ angular.module('PersonalSiteAdmin', [
         experience.editionView().fields(experience.creationView().fields());
         admin.addEntity(experience);
 
-        var projectscat = nga.entity('projectscat');
+        var projectscat = nga.entity('projectscat')
+            .identifier(nga.field('_id'));
         projectscat.listView().fields([
             nga.field('name.' + lang).isDetailLink(true)
         ]);
@@ -120,7 +123,8 @@ angular.module('PersonalSiteAdmin', [
         projectscat.editionView().fields(projectscat.creationView().fields());
         admin.addEntity(projectscat);
 
-        var projects = nga.entity('projects');
+        var projects = nga.entity('projects')
+            .identifier(nga.field('_id'));
         projects.listView().fields([
             nga.field('name').isDetailLink(true),
             nga.field('category', 'reference')
@@ -146,7 +150,8 @@ angular.module('PersonalSiteAdmin', [
         projects.editionView().fields(projects.creationView().fields());
         admin.addEntity(projects);
 
-        var skillscat = nga.entity('skillscat');
+        var skillscat = nga.entity('skillscat')
+            .identifier(nga.field('_id'));
         skillscat.listView().fields([
             nga.field('name.' + lang).isDetailLink(true)
         ]);
@@ -158,7 +163,8 @@ angular.module('PersonalSiteAdmin', [
         skillscat.editionView().fields(skillscat.creationView().fields());
         admin.addEntity(skillscat);
 
-        var skills = nga.entity('skills');
+        var skills = nga.entity('skills')
+            .identifier(nga.field('_id'));
         skills.listView().fields([
             nga.field('name.' + lang).isDetailLink(true),
             nga.field('category', 'reference')

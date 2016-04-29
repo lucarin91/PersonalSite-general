@@ -16,34 +16,34 @@ var item = new Schema({
     end: {type: Date}
   },
   category: { type: Schema.Types.ObjectId, ref: 'Projects' }
-},
+}/*,
   {
     toObject: { virtuals: true },
     toJSON: { virtuals: true }
-  }
+  }*/
 );
 
-item.virtual('id')
-.get(function () {
-  return this._id.toHexString();
-});
+// item.virtual('id')
+// .get(function () {
+//   return this._id.toHexString();
+// });
 
 var projects = new Schema({
   name: {
     eng: {type:String},
     ita: {type:String}
   }
-},
+}/*,
   {
     toObject: { virtuals: true },
     toJSON: { virtuals: true }
-  }
+  }*/
 );
 
-projects.virtual('id')
-.get(function () {
-  return this._id.toHexString();
-});
+// projects.virtual('id')
+// .get(function () {
+//   return this._id.toHexString();
+// });
 /*
 projects.statics.get = function(lang,cb){
   this.find({}).populate({path:'items'}) // only works if we pushed refs to children
