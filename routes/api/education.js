@@ -62,6 +62,7 @@ router.put('/:id', function(req, res, next) {
       query.$set["score."+req.lang] = req.body.score;
   if (req.body.date && (req.body.date.begin||req.body.date.end)) query.$set.date = req.body.date;
   console.log(query);*/
+  delete req.body._id;
   Education.update({_id:req.params.id}, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);

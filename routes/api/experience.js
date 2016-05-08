@@ -59,7 +59,8 @@ router.put('/:id', function(req, res, next) {
   if (req.body.date &&
      (req.body.date.begin || req.body.date.end)) query.$set.date = req.body.date;
   console.log(query);*/
-  Experience.update({_id:req.params.id}, query, function (err, post) {
+  delete req.body._id;
+  Experience.update({_id:req.params.id}, req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
   });
