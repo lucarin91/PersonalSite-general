@@ -1,7 +1,10 @@
 #PersonalSite
+##Admin Pannel
+The amministrative pannel can be rich from `/admin`, but for now it have to be used only in development; because it doen't have any type of autentication and it show only italian data, but never than less it can modify also english data.
+
 
 ##Back-end API
-Principle Path: `/api/`
+Principle Path: `/api/eng|ita`
 All the request have to be with `Content-Type: application\json`.
 
 All the request are mapped as usual:
@@ -12,72 +15,32 @@ All the request are mapped as usual:
 
 ###Me
 route: `/me`
-request: `GET`, `PUT`
+request: `GET`, `POST`, `PUT`, `DELETE`
 
 this entry return a single json object, like:
 ```
 {
-  id: {type:id,required:true},
-  name: {type:String,required:true},
-  surname: {type:String,required:true},
-  bio:  {
-    eng: {type:String},
-    ita: {type:String}
-  },
+  _id: {type: ObjectId},
+  bio: {type:String},
   img:  {type:String}
 }
 ```
 
-###Education
-route: `/education`
+###Curriculum
+route: `/curriculum`
 request: `GET`, `POST`
 
-route: `/education/:id`
+route: `/curriculum/:id`
 request: `PUT`, `DELETE`
 
 this entry work with a json array like:
 ```
 [
   {
-    id: {type: ObjectId},
-    school: {
-      eng: {type:String},
-      ita: {type:String}
-    },
-    degree: {
-      eng: {type:String},
-      ita: {type:String}
-    },
-    location: {type:String},
-    date: {
-      begin: {type: Date},
-      end: {type: Date}
-    },
-    score: {
-      eng: {type:Number},
-      ita: {type:Number}
-    }
-  }
-]
-```
-
-###ProjectsCat
-route: `/projectscat`
-request: `GET`, `POST`
-
-route: `/projectscat/:id`
-request: `PUT`, `DELETE`
-use to add a new item in a project group, or modify and remove a project group
-
-this entry work with a json array like:
-```
-[
-  {
-    id: {type: ObjectId},
-    name: {
-      eng: {type:String},
-      ita: {type:String}
-    }
+    _id: {type: ObjectId},
+    date: {type: Date, required:true},
+    name: {type:String, required:true},
+    info: {type:String}
   }
 ]
 ```
@@ -87,46 +50,25 @@ route: `/projects`
 request: `GET`, `POST`
 
 route: `/projects/:id`
-request: `PUT`, `DELETE`
+request: `POST`, `PUT`, `DELETE`
 use to add a new item in a project group, or modify and remove a project group
+
+route: `/projects/item/:id`
+request: `PUT`, `DELETE`
+use to modify or remove a item project
 
 this entry work with a json array like:
 ```
 [
   {
-    id: {type: ObjectId},
-    name: {type:String,required:true},
-    info: {
-      eng: {type:String},
-      ita: {type:String}
-    },
-    link: {type:String},
-    date: {
-      begin: {type: Date},
-      end: {type: Date}
-    },
-    category: { type: Schema.Types.ObjectId, ref: 'Projects' }
-  }
-]
-```
-
-###SkillsCat
-route: `/skillscat`
-request: `GET`, `POST`
-
-route: `/skillscat/:id`
-request: `PUT`, `DELETE`
-use to add a new item in a project group, or modify and remove a project group
-
-this entry work with a json array like:
-```
-[
-  {
-    id: {type: ObjectId},
-    name: {
-      eng: {type:String},
-      ita: {type:String}
-    }
+    _id: {type: ObjectId},
+    name: {type:String, required:true},
+    items: [{
+              _id: {type: ObjectId},
+              name: {type:String, required:true},
+              info: {type:String},
+              link: {type:String}
+            }]
   }
 ]
 ```
@@ -139,18 +81,21 @@ route: `/skills/:id`
 request: `POST`, `PUT`, `DELETE`
 use to add a new item in a skill group, or modify and remove a skill group
 
-this entry work with a json array like:
+route: `/skills/item/:id`
+request: `PUT`, `DELETE`
+use to modify or remove a skill
 
+this entry work with a json array like:
 ```
 [
   {
-    id: {type: ObjectId},
-    name: {
-      eng: {type:String},
-      ita: {type:String}
-    },
-    point: {type:Number, required:true},
-    category: { type: Schema.Types.ObjectId, ref: 'Skills' }
+    _id: {type: ObjectId},
+    name: {type:String, required:true},
+    items: [{
+              _id: {type: ObjectId},
+              name: {type:String, required:true},
+              point: {number:String,required:true}
+            }]
   }
 ]
 ```

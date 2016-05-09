@@ -1,10 +1,14 @@
-<div>
-  <h1>{{siteText.data.projects.title}}</h1>
-  <div ng-repeat="cat in projects" class="row">
-    <h4 ng-bind="cat.name" class="col-sm-12"></h4>
-    <div ng-repeat="p in cat.items" class="col-sm-6"><a href="{{ p.link }}">
-        <h5 ng-bind="p.name"></h5></a>
-      <p ng-bind="p.info"></p>
+<container-fluid>
+  <div class="row" ng-repeat="c in cat">
+    <div class="col-md-12">
+      <div class="content-title" ng-bind="c.name | langFilter"></div>
+      <div ng-repeat="i in p | filter:{category:c._id} | orderBy: '-date.end'">
+        <a href="{{ i.link }}">
+          <div class="content-title-smoll" ng-bind="i.name"></div>
+        </a>
+        <div class="content-location" ng-bind="i.date | formatDate"></div>
+        <div class="content-text" ng-bind="i.info | langFilter"></div>
+      </div>
     </div>
   </div>
-</div>
+</container-fluid>

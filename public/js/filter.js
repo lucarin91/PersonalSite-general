@@ -1,28 +1,66 @@
-'use strict';
+(function() {
+  'use strict';
 
-/* Filters */
+  /* Filters */
 
-angular.module('mySiteFilter', [])
+  angular.module('mySiteFilter', [])
 
-.filter('interpolate', function (version) {
-    return function (text) {
+  .filter('interpolate', function(version) {
+    return function(text) {
       return String(text).replace(/\%VERSION\%/mg, version);
     };
-})
+  })
 
-.filter('formatDate', function() {
-  function pad(s) { return (s < 10) ? '0' + s : s; }
-  return function (date) {
+  .filter('formatDate', ['languageServ', function(languageServ) {
+    function pad(s) {
+      return (s < 10) ? '0' + s : s;
+    }
+    var mounth = {
+      'ita': [
+        'Gennaio',
+        'Febbraio',
+        'Marzo',
+        'Aprile',
+        'Maggio',
+        'Giugno',
+        'Luglio',
+        'Agosto',
+        'Settembre',
+        'Ottobre',
+        'Novembre',
+        'Dicembre'
+      ],
+      'eng': [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+      ]
+    };
+    function formatData(d) {
+      return [mounth[languageServ.get()][d.getMonth()], d.getFullYear()].join(' ');
+    }
+    return function(date) {
       var start = new Date(date.begin);
       var end = new Date(date.end);
-      return [[pad(start.getDate()), pad(start.getMonth()+1), start.getFullYear()].join('/'),
-              [pad(end.getDate()), pad(end.getMonth()+1), end.getFullYear()].join('/')].join(' - ');
-  }
-})
+      return [formatData(start),
+        formatData(end)
+      ].join(' - ');
+    };
+  }])
 
-.filter('langFilter', ['languageServ', function(languageServ){
-  return function(item){
-    //console.log(item);
-    return item[languageServ.get()];
-  };
-}]);
+  .filter('langFilter', ['languageServ', function(languageServ) {
+    return function(item) {
+      if (item)
+        return item[languageServ.get()];
+    };
+  }]);
+}());

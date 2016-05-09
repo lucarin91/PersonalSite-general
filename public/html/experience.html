@@ -1,0 +1,18 @@
+<container-fluid>
+  <div class="row" ng-repeat="i in e | orderBy: '-date.end'">
+    <div class="col-md-12">
+      <div class="content-title">
+        <a href="{{i.link}}">
+          <span class="content-title" ng-bind="i.company"></span>
+        </a>
+        <span class="content-subtitle">~</span>
+        <span class="content-subtitle" ng-bind="i.role | langFilter"></span>
+      </div>
+      <div class="content-location">
+        <span ng-bind="i.location"></span> |
+        <span ng-bind="i.date | formatDate"></span>
+      </div>
+      <div class="content-text" ng-bind="i.info | langFilter"></div>
+    </div>
+  </div>
+</container-fluid>

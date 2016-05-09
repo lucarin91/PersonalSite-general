@@ -1,0 +1,104 @@
+.menu-gradient {
+  margin: -50px auto 0 auto;
+  padding: 50px 0 0 0;
+  width: 200px;
+  height: 200px;
+  background-image: url('/img/content_gradient.png');
+}
+.menu-row {
+  height: 100px;
+  border: 35px solid;
+  padding: 10px;
+  color: white;
+}
+.menu-row-1 {
+  -webkit-border-image: url(img/border-start.png) 40 40 stretch;
+  /* Safari 3.1-5 */
+  -o-border-image: url(img/border-start.png) 40 40 stretch;
+  /* Opera 11-12.1 */
+  border-image: url(/img/border-start.png) 40 40 stretch;
+  height: 130px;
+  padding: 0px;
+}
+.menu-row-1 .menu-title a {
+  font-size: 40px;
+}
+.menu-row-2 {
+  -webkit-border-image: url(img/border1.png) 40 40 stretch;
+  /* Safari 3.1-5 */
+  -o-border-image: url(img/border1.png) 40 40 stretch;
+  /* Opera 11-12.1 */
+  border-image: url(/img/border1.png) 40 40 stretch;
+  border-top: 0px;
+}
+.menu-row-3 {
+  -webkit-border-image: url(img/border2.png) 40 40 stretch;
+  /* Safari 3.1-5 */
+  -o-border-image: url(img/border2.png) 40 40 stretch;
+  /* Opera 11-12.1 */
+  border-image: url(/img/border2.png) 40 40 stretch;
+  border-top: 0px;
+}
+.menu-row-4 {
+  -webkit-border-image: url(img/border1.png) 40 40 stretch;
+  /* Safari 3.1-5 */
+  -o-border-image: url(img/border1.png) 40 40 stretch;
+  /* Opera 11-12.1 */
+  border-image: url(/img/border1.png) 40 40 stretch;
+  border-top: 0px;
+}
+.menu-row-5 {
+  -webkit-border-image: url(img/border2.png) 40 40 stretch;
+  /* Safari 3.1-5 */
+  -o-border-image: url(img/border2.png) 40 40 stretch;
+  /* Opera 11-12.1 */
+  border-image: url(/img/border2.png) 40 40 stretch;
+  border-top: 0px;
+}
+.menu-row-6 {
+  -webkit-border-image: url(img/border-end.png) 40 40 stretch;
+  /* Safari 3.1-5 */
+  -o-border-image: url(img/border-end.png) 40 40 stretch;
+  /* Opera 11-12.1 */
+  border-image: url(/img/border-end.png) 40 40 stretch;
+  height: 90px;
+  border-top: 0px;
+}
+.menu-row-left {
+  text-align: left;
+}
+.menu-row-right {
+  text-align: right;
+}
+.menu-row-active {
+  height: auto;
+  min-height: 100px;
+  /*background-image: url('/img/content_gradient.png');*/
+}
+.menu-row-active .menu-title a {
+  color: white;
+  text-decoration: underline;
+}
+.menu-row-back{
+  overflow: hidden;
+}
+.menu-row-back-active{
+  height: auto;
+  min-height: 100px;
+  background-image: url('/img/content_gradient.png');
+}
+.menu-title a {
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  color: #939a95;
+}
+.menu-title-center {
+  text-align: center;
+}
+.menu-title-left {
+  text-align: left;
+}
+.menu-title-right {
+  text-align: right;
+}
