@@ -2,7 +2,7 @@
   <div class="row" ng-repeat="c in cat">
     <div class="col-md-12">
       <div class="content-title" ng-bind="c.name | langFilter"></div>
-      <div ng-repeat="i in p | filter:{category:c._id}">
+      <div ng-repeat="i in p | filter:{category:c._id} | orderBy: '-date.end'">
         <a href="{{ i.link }}">
           <div class="content-title-smoll" ng-bind="i.name"></div>
         </a>

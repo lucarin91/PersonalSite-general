@@ -1,5 +1,5 @@
 <container-fluid>
-  <div class="row" ng-repeat="i in e">
+  <div class="row" ng-repeat="i in e | orderBy: '-date.end'">
     <div class="col-md-12">
       <div class="content-title">
         <a href="{{i.link}}">
