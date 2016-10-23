@@ -2,10 +2,10 @@
 <html ng-app="mysiteApp">
 
 <head>
-  <base href="/" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Luca Rinaldi</title>
-  <!--
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Luca Rinaldi</title>
+    <!--
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -17,42 +17,38 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
     -->
 
-  <link rel="stylesheet" href="js/lib/bootstrap.min.css" />
-  <script src="js/lib/jquery.min.js"></script>
-  <script src="js/lib/bootstrap.min.js"></script>
-  <script src="js/lib/angular.min.js"></script>
-  <script src="js/lib/angular-resource.min.js"></script>
-  <script src="js/lib/angular-sanitize.min.js"></script>
-  <script src="js/lib/angular-ui-router.min.js"></script>
-  <script src="js/lib/angular-translate.min.js"></script>
-  <link rel="stylesheet" href="js/lib/font-awesome.min.css" />
+    <link rel="stylesheet" href="js/lib/bootstrap.min.css" />
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/lib/angular-resource.min.js"></script>
+    <script src="js/lib/angular-sanitize.min.js"></script>
+    <script src="js/lib/angular-ui-router.min.js"></script>
+    <script src="js/lib/angular-translate.min.js"></script>
+    <link rel="stylesheet" href="js/lib/font-awesome.min.css" />
 
-  <link rel="stylesheet" href="style/source-sans-pro.css" />
-  <link rel="stylesheet" href="style/main.css" />
-  <link rel="stylesheet" href="style/menu.css" />
-  <link rel="stylesheet" href="style/footer.css" />
-  <script src="js/app.js"></script>
-  <script src="js/service.js"></script>
-  <script src="js/controller.js"></script>
-  <script src="js/filter.js"></script>
-  <script src="js/directive.js"></script>
+    <link rel="stylesheet" href="style/source-sans-pro.css" />
+    <link rel="stylesheet" href="style/main.css" />
+    <link rel="stylesheet" href="style/menu.css" />
+    <link rel="stylesheet" href="style/footer.css" />
+    <script src="js/app.js"></script>
+    <script src="js/service.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/filter.js"></script>
+    <script src="js/directive.js"></script>
 </head>
 
 <body>
-
-  <div ui-view></div>
-
-  <div class="row footer" ng-controller="FooterCtrl">
-    <div class="col-sm-12">
-      <div class="language">
-        <a href ng-click="ln.changeToIta()" ng-class="{ active: ln.isIta() }">ITA</a> |
-        <a href ng-click="ln.changeToEng()" ng-class="{ active: ln.isEng() }">ENG</a>
-      </div>
-      <a class="twitter-timeline" data-dnt="true" data-theme="dark" data-link-color="#E81C4F" href="https://twitter.com/lucarin91">Tweets by lucarin91</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-      <img src="img/firma-cristina.png"/>
+    <div ui-view></div>
+    <div class="row footer" ng-controller="FooterCtrl">
+        <div class="col-sm-12">
+            <div class="language">
+                <a href ng-click="ln.changeToIta()" ng-class="{ active: ln.isIta() }">ITA</a> |
+                <a href ng-click="ln.changeToEng()" ng-class="{ active: ln.isEng() }">ENG</a>
+            </div>
+            <img src="img/firma-cristina.png" />
+        </div>
     </div>
-  </div>
-
 </body>
 
 </html>
