@@ -46,7 +46,7 @@
       ]
     };
     function formatData(d) {
-      if (d) return [mounth[languageServ.get()][d.getMonth()], d.getFullYear()].join(' ');
+      if (!isNaN(d)) return [mounth[languageServ.get()][d.getMonth()], d.getFullYear()].join(' ');
       else
         if (languageServ.get() == 'eng') return 'on going';
         else return 'presente';
