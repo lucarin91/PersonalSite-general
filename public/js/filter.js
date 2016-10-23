@@ -46,7 +46,10 @@
       ]
     };
     function formatData(d) {
-      return [mounth[languageServ.get()][d.getMonth()], d.getFullYear()].join(' ');
+      if (d) return [mounth[languageServ.get()][d.getMonth()], d.getFullYear()].join(' ');
+      else
+        if (languageServ.get() == 'eng') return 'on going';
+        else return 'presente';
     }
     return function(date) {
       var start = new Date(date.begin);
