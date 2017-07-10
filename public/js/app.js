@@ -18,7 +18,7 @@
       } else {
         event.preventDefault();
         $state.go('menu', {
-          lang: 'ita'
+          lang: 'eng'
         });
       }
     });
