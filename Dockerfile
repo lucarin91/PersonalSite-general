@@ -1,6 +1,6 @@
 # Use phusion/passenger-full as base image. To make your builds reproducible, make
 # sure you lock down to a specific version, not to `latest`!
-FROM phusion/passenger-full:0.9.15
+FROM phusion/passenger-full:0.9.25
 
 # Set correct environment variables.
 ENV HOME /root
