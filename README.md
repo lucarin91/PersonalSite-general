@@ -1,9 +1,8 @@
-#PersonalSite
-##Admin Pannel
-The amministrative pannel can be rich from `/admin`, but for now it have to be used only in development; because it doen't have any type of autentication and it show only italian data, but never than less it can modify also english data.
+# PersonalSite
+## Admin Pannel
+The amministrative pannel can be rich from `/admin`.
 
-
-##Back-end API
+## Back-end API
 Principle Path: `/api/eng|ita`
 All the request have to be with `Content-Type: application\json`.
 
@@ -13,7 +12,7 @@ All the request are mapped as usual:
 - PUT to modify one or all the property
 - DELETE to delete a joson object
 
-###Me
+### Me
 route: `/me`
 request: `GET`, `POST`, `PUT`, `DELETE`
 
@@ -26,8 +25,9 @@ this entry return a single json object, like:
 }
 ```
 
-###Curriculum
+### Curriculum
 route: `/curriculum`
+
 request: `GET`, `POST`
 
 route: `/curriculum/:id`
@@ -45,7 +45,7 @@ this entry work with a json array like:
 ]
 ```
 
-###Projects
+### Projects
 route: `/projects`
 request: `GET`, `POST`
 
@@ -73,7 +73,7 @@ this entry work with a json array like:
 ]
 ```
 
-###Skills
+### Skills
 route: `/skills`
 request: `GET`, `POST`
 
