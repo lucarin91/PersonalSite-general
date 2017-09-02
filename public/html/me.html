@@ -1,9 +1,13 @@
 <container-fluid>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-sm-4 bio-img">
       <img ng-src="{{ me.img }}" />
     </div>
     <div ng-bind="me.bio | langFilter" class="col-sm-8 text-justify bio-text"></div>
+  </div> -->
+  <div class="text-center">
+    <img ng-src="{{ me.img }}" class="rounded bio-img" alt="lucarin image">
+    <div ng-bind="me.bio | langFilter" class="text-justify bio-text"></div>
   </div>
 </container-fluid>
 <!--<testinput mod="mod" text="test">qualcosa</testinput>
