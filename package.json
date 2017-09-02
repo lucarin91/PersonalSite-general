@@ -1,19 +1,19 @@
 {
-  "name": "application-name",
+  "name": "lucarin",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "body-parser": "^1.13.1",
-    "debug": "^2.2.0",
-    "errorhandler": "^1.4.0",
-    "express": "^4.12.4",
-    "express-jwt": "^3.3.0",
-    "jade": "^1.11.0",
-    "jsonwebtoken": "^5.7.0",
-    "lorem-ipsum": "^1.0.3",
-    "method-override": "^2.3.3",
-    "mongoose": "~4.4.15",
-    "morgan": "^1.6.0",
-    "mustache": "^2.1.2"
+    "body-parser": "^1.17.2",
+    "debug": "^3.0.1",
+    "errorhandler": "^1.5.0",
+    "express": "^4.15.4",
+    "express-jwt": "^5.3.0",
+    "jsonwebtoken": "^7.4.3",
+    "lorem-ipsum": "^1.0.4",
+    "method-override": "^2.3.9",
+    "mongoose": "^4.11.9",
+    "morgan": "^1.8.2",
+    "mustache": "^2.3.0",
+    "pug": "^2.0.0-rc.3"
   }
 }
