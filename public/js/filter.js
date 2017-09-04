@@ -48,7 +48,7 @@
     function formatData(d) {
       if (!isNaN(d)) return [mounth[languageServ.get()][d.getMonth()], d.getFullYear()].join(' ');
       else
-        if (languageServ.get() == 'eng') return 'on going';
+        if (languageServ.get() == 'eng') return 'ongoing';
         else return 'presente';
     }
     return function(date) {
