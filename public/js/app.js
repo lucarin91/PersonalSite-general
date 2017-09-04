@@ -131,7 +131,7 @@
         url: "/contacts",
         views: {
           "viewContacts": {
-            template: ""
+            templateUrl: "html/contact.html",
           }
         }
       });

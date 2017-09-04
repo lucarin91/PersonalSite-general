@@ -114,13 +114,14 @@ app.use('/api/projects', api.projects);
 app.use('/api/projectscat', api.projectsCat);
 app.use('/api/skills', api.skills);
 app.use('/api/skillscat', api.skillsCat);
-app.use('/api/latex', api.latex);
+// app.use('/api/latex', api.latex);
+// app.use('/api/mail', require('./routes/api/mail'));
 
 // redirect all others to the index (HTML5 history)
 //app.use('*', index);
 
 app.use('*', function(req, res, next) {
-    res.sendfile(__dirname + '/public/index.html');
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 /**
