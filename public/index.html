@@ -40,31 +40,31 @@
 
 <body>
     <div ui-view></div>
-    <div class="footer" ng-controller="FooterCtrl">
-        <div class="row">
-            <div class="col align-self-center">
-              <div class="footer-logo-box">
-                <a href="https://www.linkedin.com/in/lucarin91/" target="_blank">
-                  <img src="img/linkedin.png" class="footer-logo float-right" alt="linkedin logo">
-                </a>
-                <a href="https://github.com/lucarin91" target="_blank">
-                  <img src="img/github.png" class="footer-logo float-left" alt="github logo">
-                </a>
-              </div>
+    <div class="container footer" ng-controller="FooterCtrl">
+            <div class="row">
+                <div class="col align-self-center">
+                    <div class="footer-logo-box">
+                        <a href="https://www.linkedin.com/in/lucarin91/" target="_blank">
+                            <img src="img/linkedin.png" class="footer-logo float-right" alt="linkedin logo">
+                        </a>
+                        <a href="https://github.com/lucarin91" target="_blank">
+                            <img src="img/github.png" class="footer-logo float-left" alt="github logo">
+                        </a>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-          <div class="col align-self-center footer-language">
-              <a href ng-click="ln.changeToEng()" ng-class="{ active: ln.isEng() }">ENG</a> |
-              <a href ng-click="ln.changeToIta()" ng-class="{ active: ln.isIta() }">ITA</a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col align-self-center footer-sign">
-                <img src="img/firma-cristina.png" />
-          </div>
-        </div>
-      </div>
+            <div class="row">
+                <div class="col align-self-center footer-language">
+                    <a href ng-click="ln.changeToEng()" ng-class="{ active: ln.isEng() }">ENG</a> |
+                    <a href ng-click="ln.changeToIta()" ng-class="{ active: ln.isIta() }">ITA</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col align-self-center footer-sign">
+                    <img src="img/firma-cristina.png" />
+                </div>
+            </div>
+        </div >
 </body>
 
 </html>
