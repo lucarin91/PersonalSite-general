@@ -3,8 +3,7 @@
 
 var express = require('express');
 var router = express.Router();
-var sys   = require('sys'),
-    cp = require('child_process'),
+var cp = require('child_process'),
     spawn = require('child_process').spawn,
     path = require('path'),
     //mu = require('mu2'),

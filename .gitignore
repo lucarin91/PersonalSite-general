@@ -1,8 +1,8 @@
+node_modules/
 bower_components
-node_modules
 .*
 
-#Latex
+# Latex
 *.aux
 *.log
 *.out

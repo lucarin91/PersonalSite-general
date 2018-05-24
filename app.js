@@ -23,7 +23,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('password', process.env.PASSWORD || 'password');
 app.set('private_key', process.env.PRIVATE_KEY || 'asdkj3428isakksjwjwe8d8salkj');
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
     extended: true
