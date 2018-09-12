@@ -22,6 +22,7 @@ var app = module.exports = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('password', process.env.PASSWORD || 'password');
+app.set('db_name', process.env.DB_NAME || 'personal');
 app.set('private_key', process.env.PRIVATE_KEY || 'asdkj3428isakksjwjwe8d8salkj');
 app.set('view engine', 'pug');
 app.use(morgan('dev'));
@@ -47,7 +48,7 @@ if ('production' == app.get('env')) {
 }
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://' + app.get('mongodb_uri') + '/personal', function(err) {
+mongoose.connect('mongodb://' + app.get('mongodb_uri') + '/' + app.get('db_name'), function(err) {
     if (err) {
         console.log('connection error', err);
     } else {
