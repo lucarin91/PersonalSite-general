@@ -20,8 +20,6 @@ else
   cd $APP_DIR
 fi
 
-export PATH=$PATH:/opt/passenger/bin
-
 # Install dependencies
 npm install
 
